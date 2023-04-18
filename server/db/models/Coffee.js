@@ -3,26 +3,26 @@ const Sequelize = require("sequelize");
 const db = require("./db");
 
 module.exports = db.define("coffee", {
-  Name: {
+  name: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
   },
-  CountryOrigin: {
+  countryOrigin: {
     type: Sequelize.STRING,
   },
-  Price: {
+  price: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  Roast: {
+  roast: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  Display: {
+  display: {
     Image,
   },
-  Quantity: {
+  quantity: {
     type: Sequelize.STRING,
   },
 });
