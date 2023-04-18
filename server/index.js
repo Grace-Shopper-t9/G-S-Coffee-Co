@@ -2,7 +2,11 @@ const { db } = require("./db");
 const PORT = process.env.PORT || 8080;
 const app = require("./app");
 const seed = require("../script/seed");
-//klsdjflskjdflkjsldkfj
+
+
+
+
+
 const init = async () => {
   try {
     if (process.env.SEED === "true") {
@@ -17,6 +21,6 @@ const init = async () => {
   }
 };
 
+
 init();
 
-////Dans Work attempt 2
