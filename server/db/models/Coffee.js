@@ -22,4 +22,7 @@ module.exports = db.define("coffee", {
   Display: {
     Image,
   },
+  Quantity: {
+    type: Sequelize.STRING,
+  },
 });
