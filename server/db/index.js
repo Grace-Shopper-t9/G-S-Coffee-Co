@@ -7,7 +7,7 @@ const Coffee = require("./models/Coffee");
 const Cart = require("./models/Cart");
 const Orders = require("./models/Orders");
 
-//associations could go here!
+Cart.belongsTo.User
 
 module.exports = {
   db,
