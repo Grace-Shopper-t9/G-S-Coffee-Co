@@ -13,7 +13,7 @@ module.exports = router;
 router.get("/", async (req, res, next) => {
   try {
     const cart = await Cart.findByPk(req.params.id, {
-      attributes: ["id", "cart", "userId"],
+      attributes: ["id", "cart", "quanitiy", "userId"],
       include: [User, Coffee],
     });
     if (userId === User.id) {
