@@ -7,7 +7,15 @@ const Coffee = require("./models/Coffee");
 const Cart = require("./models/Cart");
 const Orders = require("./models/Orders");
 
-Cart.belongsTo.User
+Cart.belongsTo(Orders);
+Orders.hasOne(Cart);
+
+Orders.belongsTo(User);
+User.hasOne(Orders);
+
+Cart.hasMany(Coffee);
+
+Coffee.hasMany(Cart);
 
 module.exports = {
   db,

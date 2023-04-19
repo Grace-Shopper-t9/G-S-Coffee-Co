@@ -16,7 +16,7 @@ module.exports = db.define("coffee", {
     allowNull: false,
   },
   description: {
-    type: Sequelize.TEXT("long"),
+    type: Sequelize.TEXT,
   },
   roast: {
     type: Sequelize.STRING,
