@@ -1,5 +1,5 @@
 {
-  "name": "react-coffee",
+  "name": "reactcoffee",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "main": "index.js",
@@ -25,7 +25,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "pg": "^8.8.0",
+    "pg": "^8.10.0",
     "sequelize": "^6.25.3"
   },
   "devDependencies": {
