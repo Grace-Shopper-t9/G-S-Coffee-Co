@@ -4,7 +4,7 @@ const { coffee } = require("../db");
 // GET /api/coffee
 router.get("/", async (req, res, next) => {
   try {
-    const coffees = await Coffee.findAll({
+    const coffees = await coffee.findAll({
       where: req.query,
       attributes: ["name", "countryOrigin", "price", "roast", "description"],
     });
@@ -17,8 +17,8 @@ router.get("/", async (req, res, next) => {
 // GET /api/coffee/:coffeeID
 router.get("/:coffeeId", async (req, res, next) => {
   try {
-    const coffee = await Coffee.findByPk(req.params.coffeeId);
-    res.json(coffee);
+    const singleCoffee = await coffee.findByPk(req.params.coffeeId);
+    res.json(singleCoffee);
   } catch (error) {
     next(error);
   }
