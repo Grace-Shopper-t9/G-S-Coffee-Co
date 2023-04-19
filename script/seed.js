@@ -1,58 +1,58 @@
+/* eslint-disable no-unused-vars */
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+// eslint-disable-next-line no-unused-vars
+const {db, models: {User, Cart, Coffee, Orders} } = require('../server/db')
 
-/**
- * seed - this function clears the database, updates tables to
- *      match the models, and populates the database.
- */
-async function seed() {
-  await db.sync({ force: true }) // clears db and matches models to tables
-  console.log('db synced!')
-
-  // Creating Users
-  const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
-  ])
-
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1]
-    }
-  }
-}
-
-/*
- We've separated the `seed` function from the `runSeed` function.
- This way we can isolate the error handling and exit trapping.
- The `seed` function is concerned only with modifying the database.
-*/
-async function runSeed() {
-  console.log('seeding...')
+const seed = async () => {
   try {
-    await seed()
+    await db.sync({ force: true });
+
+    const REACTOBLEND = await Coffee.create({
+      name: "REACTO-JAMPACTO",
+      countryOrigin: "Columbian",
+      description:
+        "The perfect SIP of REACT with a kick of TION.",
+      price: 19,
+      roast:"Dark Roast",
+      image:"",
+    });
+
+    const FULLSTACKUS = await Coffee.create({
+      name: "THE FULLSTACKUS JAMPACTUS",
+      countryOrigin: "Honduras",
+      description: "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
+      price: 35,
+      roast: "Medium",
+      image: "",
+    });
+
+    const User = [
+      {
+        username: "Jane Smith",
+        password: "1234"
+      },
+     {
+        username: "John Doe",
+        password: "4321"
+      },
+    ];
+
+    
+
+    await Promise.all(
+      User.map((student) => {
+        return User.create(student);
+      })
+    );
+
+    console.log("Seeding success!");
+    db.close();
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
-  } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.error("Failed to Seed");
+    console.error(err);
+    db.close();
   }
-}
+};
 
-/*
-  Execute the `seed` function, IF we ran this module directly (`node seed`).
-  `Async` functions always return a promise, so we can use `catch` to handle
-  any errors that might occur inside of `seed`.
-*/
-if (module === require.main) {
-  runSeed()
-}
-
-// we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+seed();
