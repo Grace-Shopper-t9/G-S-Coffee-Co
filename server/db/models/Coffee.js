@@ -2,7 +2,7 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-module.exports = db.define("coffee", {
+const Coffee = db.define("coffee", {
   name: {
     type: Sequelize.STRING,
     unique: true,
@@ -29,3 +29,5 @@ module.exports = db.define("coffee", {
     type: Sequelize.STRING,
   },
 });
+
+module.exports = Coffee;
