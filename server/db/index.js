@@ -15,7 +15,7 @@ User.hasOne(Orders);
 
 Cart.hasMany(Coffee);
 
-Coffee.hasMany(Cart);
+// Coffee.hasMany(Cart);
 
 module.exports = {
   db,
