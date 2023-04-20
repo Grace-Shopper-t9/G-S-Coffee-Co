@@ -20,19 +20,17 @@ const Cart = () => {
 
   const allOrders = cart.orders;
 
-  const ordersBelongingtoUser = allOrders.filter((e) =>
-    e.userId === loggedInUserID && e.fulfilled === "false" ? e : null
+  const ordersBelongingtoUser = allOrders.filter(
+    (e) => e.userId === loggedInUserID && e.fulfilled === "false"
   );
-  // console.log(ordersBelongingtoUser);
+  console.log(ordersBelongingtoUser);
   const [userOrderId] = ordersBelongingtoUser.map((e) => e.id);
-  // console.log(userOrderId);
+  console.log(userOrderId);
 
   const allCarts = cart.cart;
   console.log(allCarts);
 
-  const userCart = allCarts.filter((cart) =>
-    cart.orderId === userOrderId ? console.log(cart) : console.log(false)
-  );
+  const userCart = allCarts.filter((cart) => cart.orderId === userOrderId);
 
   console.log(userCart);
 
