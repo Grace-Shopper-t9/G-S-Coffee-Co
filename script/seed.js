@@ -47,7 +47,7 @@ async function seed() {
   console.log("db synced!");
   const REACTOBLEND = await Coffee.create({
     name: "REACTO-JAMPACTO",
-    countryOrigin: "Colombia",
+    countryOrigin: "Colombian",
     description: "The perfect SIP of REACT with a kick of TION.",
     price: 19,
     roast: "Dark Roast",
@@ -67,11 +67,11 @@ async function seed() {
   // Creating Users
   const users = [
     {
-      username: "Jane Smith",
+      username: "Jane",
       password: "1234",
     },
     {
-      username: "John Doe",
+      username: "John",
       password: "4321",
     },
     {
@@ -86,18 +86,19 @@ async function seed() {
       return User.create(user);
     })
   );
+  //Order Seeding
   const orders = [
     {
-      fufilled: "false",
+      fulfilled: "false",
       userId: "1",
     },
     {
-      fufilled: "false",
-      userId: "1",
+      fulfilled: "false",
+      userId: "2",
     },
     {
-      fufilled: "false",
-      userId: "1",
+      fulfilled: "false",
+      userId: "3",
     },
   ];
 
@@ -106,8 +107,12 @@ async function seed() {
       return Orders.create(e);
     })
   );
-
+  //Cart Seeding
   const carts = [
+    {
+      orderId: "1",
+      coffeeId: "1",
+    },
     {
       orderId: "2",
       coffeeId: "2",
@@ -125,12 +130,6 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
-  // return {
-  //   users: {
-  //     cody: users[0],
-  //     murphy: users[1],
-  //   },
-  // };
 }
 
 async function runSeed() {

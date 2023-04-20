@@ -1,23 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = [];
+const initialState = { cart: [], orders: [], coffees: [] };
 
-export const fetchCartAsync = createAsyncThunk(
-  "/cart/fetchCart",
-  async (cartId) => {
-    const { data } = await axios.get(`/api/cart/${cartId}`);
-    return data;
-  }
-);
+export const fetchAllCartsAsync = createAsyncThunk("/carts", async () => {
+  const { data } = await axios.get(`/api/carts`);
+  return data;
+});
+export const fetchAllOrdersAsync = createAsyncThunk("/orders", async () => {
+  const { data } = await axios.get(`/api/orders`);
+  return data;
+});
+export const fetchAllCoffeesAsync = createAsyncThunk("/coffees", async () => {
+  const { data } = await axios.get(`/api/coffees`);
+  return data;
+});
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCartAsync.fulfilled, (state, action) => {
-      return action.payload;
+    builder.addCase(fetchAllCartsAsync.fulfilled, (state, action) => {
+      state.cart = action.payload;
+    });
+    builder.addCase(fetchAllOrdersAsync.fulfilled, (state, action) => {
+      state.orders = action.payload;
+    });
+    builder.addCase(fetchAllCoffeesAsync.fulfilled, (state, action) => {
+      state.coffees = action.payload;
     });
   },
 });

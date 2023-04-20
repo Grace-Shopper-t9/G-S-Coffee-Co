@@ -13,7 +13,8 @@ Orders.hasOne(Cart);
 Orders.belongsTo(User);
 User.hasOne(Orders);
 
-// Cart.hasMany(Coffee);
+Cart.hasMany(Coffee);
+Coffee.belongsTo(Cart);
 
 // Coffee.hasMany(Cart);
 

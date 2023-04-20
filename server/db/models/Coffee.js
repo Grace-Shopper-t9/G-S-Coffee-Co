@@ -28,6 +28,9 @@ const Coffee = db.define("coffee", {
   quantity: {
     type: Sequelize.STRING,
   },
+  cartId: {
+    type: Sequelize.INTEGER,
+  },
 });
 
 module.exports = Coffee;

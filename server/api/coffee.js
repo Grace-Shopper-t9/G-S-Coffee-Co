@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Coffee },
 } = require("../db");
+const Cart = require("../db/models/Cart");
 
 // GET /api/coffee
 router.get("/", async (req, res, next) => {
@@ -15,6 +16,7 @@ router.get("/", async (req, res, next) => {
         "roast",
         "description",
       ],
+      include: [Cart],
     });
     res.json(coffees);
   } catch (error) {

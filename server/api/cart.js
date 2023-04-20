@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const { Cart } = require("../db/models/Cart");
-const { User } = require("../db/models/User");
-const { Coffee } = require("../db/models/Coffee");
-const { Orders } = require("../db/models/Orders");
+const Cart = require("../db/models/Cart");
+const User = require("../db/models/User");
+const Coffee = require("../db/models/Coffee");
+const Orders = require("../db/models/Orders");
 module.exports = router;
 
 //once relationships are defined we need a function here that checks the cart
@@ -13,15 +13,22 @@ module.exports = router;
 
 router.get("/", async (req, res, next) => {
   try {
-    const cart = await Cart.findByPk(req.params.id, {
-      attributes: ["id", "cart", "quanitiy"],
+    const cart = await Cart.findAll({
+      attributes: ["id", "orderId", "coffeeId"],
       include: [Orders, Coffee],
     });
-    // if (userId === User.id) {
     res.json(cart);
-    // } else {
-    //   res.json("wrong cart for user");
-    // }
+  } catch (err) {
+    next(err);
+  }
+});
+router.get("/:id", async (req, res, next) => {
+  try {
+    const cart = await Cart.findByPk(req.params.id, {
+      attributes: ["id", "orderId", "coffeeId"],
+      include: [Orders, Coffee],
+    });
+    res.json(cart);
   } catch (err) {
     next(err);
   }
