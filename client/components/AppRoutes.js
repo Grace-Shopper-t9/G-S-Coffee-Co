@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import Home from "./Home";
+import About from "./About";
 import { me } from "./store";
 
 /**
@@ -19,15 +20,19 @@ const AppRoutes = () => {
 
   return (
     <div>
+      <div></div>
       {isLoggedIn ? (
         <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       ) : (
         <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route
-            path="/*"
+            path="/"
             element={<AuthForm name="login" displayName="Login" />}
           />
           <Route
