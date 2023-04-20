@@ -7,13 +7,13 @@ const seed = require("../script/seed");
 
 // const init = async () => {
 //   try {
-//     console.log(process.env.SEED);
+//     // console.log(process.env.SEED);
 //     if (process.env.SEED === "true") {
-//       console.log("if seed");
+//       // console.log("if seed");
 //       await seed();
 //     } else {
 //       console.log("else db.sync");
-//       console.log(process.env);
+//       // console.log(process.env);
 //       await db.sync();
 //     }
 //     // start listening (and create a 'server' object representing our server)

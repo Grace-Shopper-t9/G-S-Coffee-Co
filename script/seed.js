@@ -4,7 +4,7 @@
 // eslint-disable-next-line no-unused-vars
 const {
   db,
-  models: { User, Coffee, Cart },
+  models: { User, Coffee, Cart, Orders },
 } = require("../server/db/");
 
 // const seed = async () => {
@@ -63,10 +63,6 @@ async function seed() {
     roast: "Medium",
     image: "",
   });
-  // const users = await Promise.all([
-  //   User.create({ username: "cody", password: "123" }),
-  //   User.create({ username: "murphy", password: "123" }),
-  // ]);
 
   // Creating Users
   const users = [
@@ -90,15 +86,51 @@ async function seed() {
       return User.create(user);
     })
   );
+  const orders = [
+    {
+      fufilled: "false",
+      userId: "1",
+    },
+    {
+      fufilled: "false",
+      userId: "1",
+    },
+    {
+      fufilled: "false",
+      userId: "1",
+    },
+  ];
+
+  await Promise.all(
+    orders.map((e) => {
+      return Orders.create(e);
+    })
+  );
+
+  const carts = [
+    {
+      orderId: "2",
+      coffeeId: "2",
+    },
+    {
+      orderId: "3",
+      coffeeId: "3",
+    },
+  ];
+  await Promise.all(
+    carts.map((e) => {
+      return Cart.create(e);
+    })
+  );
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-  };
+  // return {
+  //   users: {
+  //     cody: users[0],
+  //     murphy: users[1],
+  //   },
+  // };
 }
 
 async function runSeed() {
