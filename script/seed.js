@@ -95,12 +95,13 @@ async function seed() {
       quantity: 4,
     },
   ];
-  await Promise.all(
+
+  const [coffee1, coffee2, coffee3] = await Promise.all(
     coffees.map((e) => {
       return Coffee.create(e);
     })
   );
-
+  console.log(coffee1, coffee2, coffee3);
   // Creating Users
   const users = [
     {
@@ -159,7 +160,7 @@ async function seed() {
       coffeeId: "3",
     },
   ];
-  await Promise.all(
+  const [cart1, cart2, cart3] = await Promise.all(
     carts.map((e) => {
       return Cart.create(e);
     })

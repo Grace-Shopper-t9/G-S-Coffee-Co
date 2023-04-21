@@ -29,9 +29,6 @@ const Coffee = db.define("coffee", {
     type: Sequelize.INTEGER,
     defaultValue: 1,
   },
-  cartId: {
-    type: Sequelize.INTEGER,
-  },
 });
 
 module.exports = Coffee;

@@ -7,14 +7,22 @@ const Coffee = require("./models/Coffee");
 const Cart = require("./models/Cart");
 const Orders = require("./models/Orders");
 
-Cart.belongsTo(Orders);
-Orders.hasOne(Cart);
+// Cart.belongsTo(Orders);
+// Orders.hasMany(Cart);
 
-Orders.belongsTo(User);
-User.hasOne(Orders);
+// Orders.belongsTo(User);
+// User.hasOne(Orders);
 
-Cart.hasMany(Coffee);
-Coffee.belongsTo(Cart);
+// Cart.hasMany(Coffee);
+// Coffee.belongsTo(Cart);
+
+Cart.belongsTo(User);
+User.hasOne(Cart);
+
+Cart.hasMany(LineItem);
+LineItem.hasOne(Cart);
+
+LineItem.hasOne(Coffee);
 
 // Coffee.hasMany(Cart);
 
