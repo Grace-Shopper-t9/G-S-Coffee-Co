@@ -15,6 +15,7 @@ router.get("/", async (req, res, next) => {
         "price",
         "roast",
         "description",
+        "quantity",
       ],
       include: [Cart],
     });

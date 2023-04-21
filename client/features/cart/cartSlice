@@ -15,6 +15,32 @@ export const fetchAllCoffeesAsync = createAsyncThunk("/coffees", async () => {
   const { data } = await axios.get(`/api/coffees`);
   return data;
 });
+export const editOrderStatusAsync = createAsyncThunk(
+  "orders/editOrderStatus",
+  async ({ orderId, fulfilled }) => {
+    try {
+      const { data } = await axios.put(`/api/orders/${orderId}`, {
+        fulfilled,
+      });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+export const removeItemFromCartAsync = createAsyncThunk(
+  "orders/editCartContents",
+  async ({ orderId, userId }) => {
+    try {
+      const { data } = await axios.put(`/api/orders/${orderId}`, {
+        userId,
+      });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -29,6 +55,12 @@ export const cartSlice = createSlice({
     });
     builder.addCase(fetchAllCoffeesAsync.fulfilled, (state, action) => {
       state.coffees = action.payload;
+    });
+    builder.addCase(editOrderStatusAsync.fulfilled, (state, action) => {
+      return action.payload;
+    });
+    builder.addCase(removeItemFromCartAsync.fulfilled, (state, action) => {
+      return action.payload;
     });
   },
 });
