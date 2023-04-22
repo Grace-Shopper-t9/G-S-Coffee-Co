@@ -27,5 +27,15 @@ router.get("/:orderId", async (req, res, next) => {
     next(error);
   }
 });
+router.put("/:orderid", async (req, res, next) => {
+  try {
+    const singleOrder = await Orders.findByPk(req.params.orderid, {
+      include: [Cart],
+    });
+    res.send(await singleOrder.update(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
