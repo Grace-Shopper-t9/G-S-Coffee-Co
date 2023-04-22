@@ -14,9 +14,7 @@ const Home = () => {
   const dispatch = useDispatch();
   console.log(coffees);
   const username = useSelector((state) => state.auth.me?.username);
-  const handleAddToCart = ({ coffeeId: id }) => {
-    dispatch(id);
-  };
+
   useEffect(() => {
     dispatch(fetchCoffeesAsync());
   }, [dispatch]);
@@ -28,19 +26,18 @@ const Home = () => {
         {coffees && coffees.length ? (
           coffees.map((coffee) => (
             <div className="coffees" key={`All Coffees ${coffee.id}`}>
-              <NavLink to={`/${coffee.id}`}>
+              <NavLink to={`/coffees/${coffee.id}`}>
                 <h3>{coffee.name}</h3>
-                <h4>{coffee.price}</h4>
-                <h4>{coffee.roast}</h4>
-                <h4>{coffee.countryOrigin}</h4>
-                <h4>{coffee.description}</h4>
-                <img
-                  className="coffee-img"
-                  src={coffee.imageUrl}
-                  alt={coffee.name}
-                ></img>
               </NavLink>
-              <button onClick={() => handleAddToCart(coffee.id)}>add</button>
+              <h4>{coffee.price}</h4>
+              <h4>{coffee.roast}</h4>
+              <h4>{coffee.countryOrigin}</h4>
+              <h4>{coffee.description}</h4>
+              <img
+                className="coffee-img"
+                src={coffee.imageUrl}
+                alt={coffee.name}
+              ></img>
               <hr />
             </div>
           ))

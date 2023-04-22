@@ -24,7 +24,7 @@ const about = () => {
         espresso, we've got you covered. Our expertly roasted coffee is
         available in a variety of blends and single-origin options, so you can
         find the perfect flavor to suit your taste. So why not join us on a
-        journey of discovery and taste the difference with React Coffee?
+        journey of discovery and taste the difference with React Coffee.
       </p>
     </div>
   );
