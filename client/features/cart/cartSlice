@@ -1,12 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = { cart: [], order: [], user: [] };
+const initialState = { coffee: [], order: [], user: [] };
 
 export const fetchOneCartAsync = createAsyncThunk("/carts", async (cartId) => {
   const { data } = await axios.get(`/api/carts/${cartId}`);
   return data;
 });
+// export const fetchAllCoffeesAsync = createAsyncThunk("/coffees", async () => {
+//   const { data } = await axios.get(`/api/coffees`);
+//   return data;
+// });
 export const fetchOneOrderAsync = createAsyncThunk(
   "/orders",
   async (orderId) => {
@@ -34,6 +38,7 @@ export const editOrderStatusAsync = createAsyncThunk(
 export const removeItemFromCartAsync = createAsyncThunk(
   "coffees/editCartContents",
   async ({ coffeeId, cartId }) => {
+    console.log("apI update request...cartId:", cartId);
     try {
       const { data } = await axios.put(`/api/coffees/${coffeeId}`, {
         cartId,
@@ -51,8 +56,11 @@ export const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchOneCartAsync.fulfilled, (state, action) => {
-      state.cart = action.payload;
+      state.coffee = action.payload.coffees;
     });
+    // builder.addCase(fetchAllCoffeesAsync.fulfilled, (state, action) => {
+    //   state.coffee = action.payload;
+    // });
     builder.addCase(fetchOneOrderAsync.fulfilled, (state, action) => {
       state.order = action.payload;
     });
@@ -63,7 +71,10 @@ export const cartSlice = createSlice({
       return action.payload;
     });
     builder.addCase(removeItemFromCartAsync.fulfilled, (state, action) => {
-      return action.payload;
+      const newState = state.coffee.filter(
+        (coffee) => coffee.id !== action.payload.id
+      );
+      state.coffee = newState;
     });
   },
 });

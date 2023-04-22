@@ -39,7 +39,9 @@ router.get("/:coffeeId", async (req, res, next) => {
 });
 router.put("/:coffeeid", async (req, res, next) => {
   try {
-    const singleCoffee = await Coffee.findByPk(req.params.coffeeid);
+    const singleCoffee = await Coffee.findByPk(req.params.coffeeid, {
+      include: [Cart],
+    });
     res.send(await singleCoffee.update(req.body));
   } catch (error) {
     next(error);
