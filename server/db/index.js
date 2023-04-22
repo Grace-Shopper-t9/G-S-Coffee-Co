@@ -7,22 +7,22 @@ const Coffee = require("./models/Coffee");
 const Cart = require("./models/Cart");
 const Orders = require("./models/Orders");
 
-// Cart.belongsTo(Orders);
-// Orders.hasMany(Cart);
+User.hasOne(Orders);
+Orders.belongsTo(User);
 
-// Orders.belongsTo(User);
-// User.hasOne(Orders);
+Orders.hasOne(Cart);
+Cart.belongsTo(Orders);
 
-// Cart.hasMany(Coffee);
-// Coffee.belongsTo(Cart);
+Cart.hasMany(Coffee);
+Coffee.belongsTo(Cart);
 
-Cart.belongsTo(User);
-User.hasOne(Cart);
+// Cart.belongsTo(User);
+// User.hasOne(Cart);
 
-Cart.hasMany(LineItem);
-LineItem.hasOne(Cart);
+// Cart.hasMany(LineItem);
+// LineItem.hasOne(Cart);
 
-LineItem.hasOne(Coffee);
+// LineItem.hasOne(Coffee);
 
 // Coffee.hasMany(Cart);
 
@@ -31,7 +31,7 @@ module.exports = {
   models: {
     User,
     Coffee,
-    Cart,
     Orders,
+    Cart,
   },
 };

@@ -19,17 +19,10 @@ router.get("/", async (req, res, next) => {
 // GET /api/coffee/:orderID
 router.get("/:orderId", async (req, res, next) => {
   try {
-    const singleOrder = await Orders.findByPk(req.params.orderId);
+    const singleOrder = await Orders.findByPk(req.params.orderId, {
+      include: [Cart],
+    });
     res.json(singleOrder);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.put("/:orderid", async (req, res, next) => {
-  try {
-    const singleOrder = await Orders.findByPk(req.params.orderid);
-    res.send(await singleOrder.update(req.body));
   } catch (error) {
     next(error);
   }

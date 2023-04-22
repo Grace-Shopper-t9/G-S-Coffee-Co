@@ -1,18 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = { cart: [], orders: [], coffees: [] };
+const initialState = { cart: [], order: [], user: [] };
 
-export const fetchAllCartsAsync = createAsyncThunk("/carts", async () => {
-  const { data } = await axios.get(`/api/carts`);
+export const fetchOneCartAsync = createAsyncThunk("/carts", async (cartId) => {
+  const { data } = await axios.get(`/api/carts/${cartId}`);
   return data;
 });
-export const fetchAllOrdersAsync = createAsyncThunk("/orders", async () => {
-  const { data } = await axios.get(`/api/orders`);
-  return data;
-});
-export const fetchAllCoffeesAsync = createAsyncThunk("/coffees", async () => {
-  const { data } = await axios.get(`/api/coffees`);
+export const fetchOneOrderAsync = createAsyncThunk(
+  "/orders",
+  async (orderId) => {
+    const { data } = await axios.get(`/api/orders/${orderId}`);
+    return data;
+  }
+);
+export const fetchUserAsync = createAsyncThunk("/users", async (userId) => {
+  const { data } = await axios.get(`/api/users/${userId}`);
   return data;
 });
 export const editOrderStatusAsync = createAsyncThunk(
@@ -29,11 +32,11 @@ export const editOrderStatusAsync = createAsyncThunk(
   }
 );
 export const removeItemFromCartAsync = createAsyncThunk(
-  "orders/editCartContents",
-  async ({ orderId, userId }) => {
+  "coffees/editCartContents",
+  async ({ coffeeId, cartId }) => {
     try {
-      const { data } = await axios.put(`/api/orders/${orderId}`, {
-        userId,
+      const { data } = await axios.put(`/api/coffees/${coffeeId}`, {
+        cartId,
       });
       return data;
     } catch (error) {
@@ -47,14 +50,14 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchAllCartsAsync.fulfilled, (state, action) => {
+    builder.addCase(fetchOneCartAsync.fulfilled, (state, action) => {
       state.cart = action.payload;
     });
-    builder.addCase(fetchAllOrdersAsync.fulfilled, (state, action) => {
-      state.orders = action.payload;
+    builder.addCase(fetchOneOrderAsync.fulfilled, (state, action) => {
+      state.order = action.payload;
     });
-    builder.addCase(fetchAllCoffeesAsync.fulfilled, (state, action) => {
-      state.coffees = action.payload;
+    builder.addCase(fetchUserAsync.fulfilled, (state, action) => {
+      state.user = action.payload;
     });
     builder.addCase(editOrderStatusAsync.fulfilled, (state, action) => {
       return action.payload;
