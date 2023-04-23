@@ -47,7 +47,7 @@ async function seed() {
   console.log("db synced!");
   const REACTOBLEND = await Coffee.create({
     name: "REACTO-JAMPACTO",
-    countryOrigin: "Columbian",
+    countryOrigin: "Colombia",
     description: "The perfect SIP of REACT with a kick of TION.",
     price: 19,
     roast: "Dark Roast",

@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>React Coffee</h1>
+      <h1 className="webtitle">React Coffee</h1>
       <nav>
         {isLoggedIn ? (
           <div>
@@ -28,10 +28,10 @@ const Navbar = () => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
           </div>
         )}
       </nav>

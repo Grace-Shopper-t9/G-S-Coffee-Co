@@ -5,6 +5,8 @@ import AuthForm from "./AuthForm";
 import Home from "./Home";
 import About from "./About";
 import { me } from "./store";
+import SingleCoffee from "./SingleCoffee";
+import { fetchCoffeesAsync } from "../features/allCoffees/coffeeSlice";
 
 /**
  * COMPONENT
@@ -16,6 +18,7 @@ const AppRoutes = () => {
 
   useEffect(() => {
     dispatch(me());
+    dispatch(fetchCoffeesAsync());
   }, []);
 
   return (
@@ -25,12 +28,14 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/coffees/:coffeeId" element={<SingleCoffee />} />
         </Routes>
       ) : (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/coffees/:coffeeId" element={<SingleCoffee />} />
           <Route
             path="/"
             element={<AuthForm name="login" displayName="Login" />}

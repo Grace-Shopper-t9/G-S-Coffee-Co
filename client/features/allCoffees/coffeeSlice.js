@@ -11,15 +11,6 @@ export const fetchCoffeesAsync = createAsyncThunk("All coffees", async () => {
   }
 });
 
-export const fetchAddCoffees = createAsyncThunk("Add Coffees", async () => {
-  try {
-    const { data } = await axios.post(`/api/coffees`);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 const coffeeSlice = createSlice({
   name: "coffees",
   initialState: [],
@@ -28,9 +19,6 @@ const coffeeSlice = createSlice({
     builder.addCase(fetchCoffeesAsync.fulfilled, (state, action) => {
       console.log(action.payload);
       return action.payload;
-    });
-    builder.addCase(fetchAddCoffees.fulfilled, (state, action) => {
-      state.push(action.payload);
     });
   },
 });

@@ -18,7 +18,19 @@ module.exports = {
       },
     ],
   },
+
   resolve: {
     extensions: [".js", ".jsx"],
+    fallback: {
+      util: false,
+      url: false,
+      fs: false,
+      crypto: false,
+      process: false,
+      assert: false,
+      buffer: false,
+      stream: false,
+      path: false,
+    },
   },
 };

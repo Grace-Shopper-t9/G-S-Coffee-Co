@@ -1,4 +1,5 @@
 const db = require("./db/db");
+// global.process = require("process/browser");
 // const PORT = process.env.PORT || 8080;
 const PORT = 8080;
 const app = require("./app");
