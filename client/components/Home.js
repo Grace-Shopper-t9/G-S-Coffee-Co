@@ -21,24 +21,30 @@ const Home = () => {
 
   return (
     <div>
-      <div id="coffees" className="coffeeColumn">
+      <div className="container">
+        <video src="/reactcoffeeroaster.mp4" autoPlay muted loop></video>
+      </div>
+      <div id="allcoffees" className="coffeeColumn">
         {username ? <h3>Welcome, {username}</h3> : <h3>Welcome, Guest</h3>}
         {coffees && coffees.length ? (
           coffees.map((coffee) => (
-            <div className="coffees" key={`All Coffees ${coffee.id}`}>
-              <NavLink to={`/coffees/${coffee.id}`}>
-                <h3>{coffee.name}</h3>
-              </NavLink>
-              <h4>{coffee.price}</h4>
-              <h4>{coffee.roast}</h4>
-              <h4>{coffee.countryOrigin}</h4>
-              <h4>{coffee.description}</h4>
-              <img
-                className="coffee-img"
-                src={coffee.imageUrl}
-                alt={coffee.name}
-              ></img>
-              <hr />
+            <div className="renderingwrap">
+              <div className="allcoffees" key={`All Coffees ${coffee.id}`}>
+                <div className="coffeeclickurl">
+                  <NavLink to={`/coffees/${coffee.id}`}>
+                    <h3>{coffee.name}</h3>
+                  </NavLink>
+                </div>
+                <h4>{coffee.price}</h4>
+                <h4>{coffee.roast}</h4>
+                <h4>{coffee.countryOrigin}</h4>
+                <h4>{coffee.description}</h4>
+                <img
+                  className="coffee-img"
+                  src={coffee.imageUrl}
+                  alt={coffee.name}
+                ></img>
+              </div>
             </div>
           ))
         ) : (

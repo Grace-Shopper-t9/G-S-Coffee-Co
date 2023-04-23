@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>React Coffee</h1>
+      <h1 className="webtitle">React Coffee</h1>
       <nav>
         {isLoggedIn ? (
           <div>

@@ -1,5 +1,15 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto+Mono:wght@500&display=swap');
+ 
+
 body {
-  font-family: sans-serif 
+  font-family: 'Roboto Mono', monospace;
+  background-color: black;
+}
+
+.webtitle {
+  font-family: 'Roboto Mono', monospace;
+color: whitesmoke;
 }
 
 a {
@@ -13,11 +23,88 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  font-family: 'Roboto Mono', monospace;
+  color:white;
+}
+a:active {
+  color: rgb(77, 77, 77);
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+}
+
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+.allcoffees{
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.coffeeclickurl:visited {
+  color: rgb(77, 77, 77);
+}
+
+.coffeeclickurl:active {
+  color: rgb(171, 134, 0);
+}
+
+.renderingwrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#allcoffees{
+  max-width: 100%;
+  height: auto;
+  font-family: 'Roboto Mono', monospace;
+  color: white;
+  padding-top: 500px;
+  flex-basis: calc(50% - 10px); /* 50% width with 10px of margin on each side */
+  margin: 0 10px;
+}
+
+.single-coffee{
+  font-family: 'Roboto Mono', monospace;
+  color: white;
+}
+
+
+#about{
+  font-family: 'Roboto Mono', monospace;
+  color: rgba(85, 62, 58, 0.805);
+}
+
+.containeraboutimg {
+  position: relative;
+  width: 30%;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.coffee-img {
+  max-width: 100%;
+  height: auto;
+  float: left;
+  margin: 0 1em 1em 0;
+}
+
+.coffee-img:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 

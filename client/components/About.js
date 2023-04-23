@@ -26,6 +26,9 @@ const about = () => {
         find the perfect flavor to suit your taste. So why not join us on a
         journey of discovery and taste the difference with React Coffee.
       </p>
+      <div className="containeraboutimg">
+        <img className="coffee-img" src="2.png"></img>
+      </div>
     </div>
   );
 };

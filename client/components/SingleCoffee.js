@@ -12,7 +12,10 @@ const singleCoffee = () => {
 
   const coffee = useSelector(selectSingleCoffee);
 
-  console.log(coffeeId);
+  //   const updateCartHandler = (id, value) => {
+  //     let updatedCart = cart.map(item => item.id === id ? item.quantity += value : item)
+
+  //     setCart(updatedCart)}
 
   //   const handleAddToCart = ({ coffeeId: id }) => {
   //     dispatch(id);
@@ -26,13 +29,31 @@ const singleCoffee = () => {
 
   return (
     <div>
-      <h1>hello</h1>
+      <h1></h1>
       {coffee ? (
-        <div>
-          why is this not rendering??
+        <div className="single-coffee">
           <div key={`single coffee ${coffee.id}`}>
             <h3>{coffee.name}</h3>
-            <h3>{coffee.description} </h3>
+            <h5>{coffee.description} </h5>
+            <h4>$ {coffee.price}</h4>
+            <h4>{coffee.countryOrigin}</h4>
+            <h5>{coffee.roast}</h5>
+          </div>
+          {<img className="coffee-img" src={coffee.imageUrl}></img>}
+          {
+            <button onClick={() => handleAddToCart(coffee.id)}>
+              add to cart
+            </button>
+          }
+          <div>
+            <button onClick={() => props.handleIncrement(coffee.id, +1)}>
+              -
+            </button>
+            {coffee.qty}
+            <span>{coffee.qty === 1 ? coffee.qty : coffee.qty}</span>
+            <button onClick={() => props.handleDecrement(coffee.id, -1)}>
+              +
+            </button>
           </div>
         </div>
       ) : (
@@ -43,13 +64,3 @@ const singleCoffee = () => {
 };
 
 export default singleCoffee;
-
-// {
-/* <img className="coffee-img" src={coffee.imageUrl}></img> */
-// }
-
-// {
-/* <button onClick={() => handleAddToCart(coffee.id)}>
-              add to cart
-            </button> */
-// }
