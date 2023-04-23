@@ -1,7 +1,4 @@
 const router = require("express").Router();
-// const {
-//   models: { Coffee },
-// } = require("../db");
 
 // GET /api/about
 router.get("/about", async (req, res, next) => {

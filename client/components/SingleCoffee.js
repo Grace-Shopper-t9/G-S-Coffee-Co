@@ -12,15 +12,6 @@ const singleCoffee = () => {
 
   const coffee = useSelector(selectSingleCoffee);
 
-  //   const updateCartHandler = (id, value) => {
-  //     let updatedCart = cart.map(item => item.id === id ? item.quantity += value : item)
-
-  //     setCart(updatedCart)}
-
-  //   const handleAddToCart = ({ coffeeId: id }) => {
-  //     dispatch(id);
-  //   };
-
   useEffect(() => {
     console.log("fetching coffee data...");
     dispatch(fetchSingleCoffee(coffeeId));

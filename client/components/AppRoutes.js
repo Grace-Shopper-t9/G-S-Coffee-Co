@@ -7,6 +7,7 @@ import About from "./About";
 import { me } from "./store";
 import SingleCoffee from "./SingleCoffee";
 import { fetchCoffeesAsync } from "../features/allCoffees/coffeeSlice";
+import Cart from "./Cart";
 
 /**
  * COMPONENT
@@ -29,6 +30,7 @@ const AppRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/coffees/:coffeeId" element={<SingleCoffee />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       ) : (
         <Routes>
@@ -40,6 +42,9 @@ const AppRoutes = () => {
             path="/"
             element={<AuthForm name="login" displayName="Login" />}
           />
+          <Route path="/cart" element={<Cart />} />
+
+          <Route path="/*" element={<Home />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}

@@ -4,50 +4,15 @@
 // eslint-disable-next-line no-unused-vars
 const {
   db,
-  models: { User, Coffee, Cart },
+  models: { User, Coffee, Cart, Orders },
 } = require("../server/db/");
-
-// const seed = async () => {
-//   try {
-//     await db.sync({ force: true });
-
-//     const users = [
-//       {
-//         username: "Jane Smith",
-//         password: "1234",
-//       },
-//       {
-//         username: "John Doe",
-//         password: "4321",
-//       },
-//       {
-//         username: "Tom",
-//         password: "Tom",
-//         admin: true,
-//       },
-//     ];
-
-//     await Promise.all(
-//       users.map((user) => {
-//         return User.create(user);
-//       })
-//     );
-
-//     console.log("Seeding success!");
-//     db.close();
-//   } catch (err) {
-//     console.error("Failed to Seed");
-//     console.error(err);
-//     db.close();
-//   }
-// };
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
   const REACTOBLEND = await Coffee.create({
     name: "REACTO-JAMPACTO",
-    countryOrigin: "Colombia",
+    countryOrigin: "Colombian",
     description: "The perfect SIP of REACT with a kick of TION.",
     price: 19,
     roast: "Dark Roast",
@@ -63,19 +28,53 @@ async function seed() {
     roast: "Medium",
     image: "",
   });
-  // const users = await Promise.all([
-  //   User.create({ username: "cody", password: "123" }),
-  //   User.create({ username: "murphy", password: "123" }),
-  // ]);
+  //Coffee Seeding
+  const coffees = [
+    {
+      name: "REACTO-JAMPACTO",
+      countryOrigin: "Columbian",
+      description: "The perfect SIP of REACT with a kick of TION.",
+      price: 19,
+      roast: "Dark Roast",
+      image: "",
+      quantity: 3,
+    },
+    {
+      name: "THE FULLSTACKUS JAMPACTUS",
+      countryOrigin: "Honduras",
+      description:
+        "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
+      price: 35,
+      roast: "Medium",
+      image: "",
+      quantity: 2,
+    },
+    {
+      name: "THE FULLSTACKUS JAMPACTUS SPECIAL",
+      countryOrigin: "Buenos Aires",
+      description:
+        "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
+      price: 50,
+      roast: "Medium",
+      image: "",
+      quantity: 4,
+    },
+  ];
+
+  const [coffee1, coffee2, coffee3] = await Promise.all(
+    coffees.map((e) => {
+      return Coffee.create(e);
+    })
+  );
 
   // Creating Users
   const users = [
     {
-      username: "Jane Smith",
+      username: "Jane",
       password: "1234",
     },
     {
-      username: "John Doe",
+      username: "John",
       password: "4321",
     },
     {
@@ -90,15 +89,47 @@ async function seed() {
       return User.create(user);
     })
   );
+  //Order Seeding
+  const orders = [
+    {
+      fulfilled: "false",
+      userId: "1",
+    },
+    {
+      fulfilled: "false",
+      userId: "1",
+    },
+    {
+      fulfilled: "false",
+      userId: "3",
+    },
+  ];
+
+  await Promise.all(
+    orders.map((e) => {
+      return Orders.create(e);
+    })
+  );
+  //Cart Seeding
+  const carts = [
+    {
+      orderId: "1",
+    },
+    {
+      orderId: "2",
+    },
+    {
+      orderId: "3",
+    },
+  ];
+  const [cart1, cart2, cart3] = await Promise.all(
+    carts.map((e) => {
+      return Cart.create(e);
+    })
+  );
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-  };
 }
 
 async function runSeed() {
