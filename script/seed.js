@@ -10,26 +10,26 @@ const {
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
-  const REACTOBLEND = await Coffee.create({
-    name: "REACTO-JAMPACTO",
-    countryOrigin: "Colombian",
-    description: "The perfect SIP of REACT with a kick of TION.",
-    price: 19,
-    roast: "Dark Roast",
-    image: "",
-  });
+  // const REACTOBLEND = await Coffee.create({
+  //   name: "REACTO-JAMPACTO",
+  //   countryOrigin: "Colombian",
+  //   description: "The perfect SIP of REACT with a kick of TION.",
+  //   price: 19,
+  //   roast: "Dark Roast",
+  //   image: "",
+  // });
 
-  const FULLSTACKUS = await Coffee.create({
-    name: "THE FULLSTACKUS JAMPACTUS",
-    countryOrigin: "Honduras",
-    description:
-      "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
-    price: 35,
-    roast: "Medium",
-    image: "",
-  });
+  // const FULLSTACKUS = await Coffee.create({
+  //   name: "THE FULLSTACKUS JAMPACTUS",
+  //   countryOrigin: "Honduras",
+  //   description:
+  //     "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
+  //   price: 35,
+  //   roast: "Medium",
+  //   image: "",
+  // });
   //Coffee Seeding
-  const coffees = [
+  const allcoffees = [
     {
       name: "REACTO-JAMPACTO",
       countryOrigin: "Columbian",
@@ -61,8 +61,8 @@ async function seed() {
     },
   ];
 
-  const [coffee1, coffee2, coffee3] = await Promise.all(
-    coffees.map((e) => {
+  await Promise.all(
+    allcoffees.map((e) => {
       return Coffee.create(e);
     })
   );

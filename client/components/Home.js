@@ -29,7 +29,7 @@ const Home = () => {
         {coffees && coffees.length ? (
           coffees.map((coffee) => (
             <div className="renderingwrap">
-              <div className="allcoffees" key={`All Coffees ${coffee.id}`}>
+              <div className="allcoffees" key={coffee.id}>
                 <div className="coffeeclickurl">
                   <NavLink to={`/coffees/${coffee.id}`}>
                     <h3>{coffee.name}</h3>
