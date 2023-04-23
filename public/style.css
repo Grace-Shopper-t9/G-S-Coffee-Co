@@ -4,12 +4,12 @@
 
 body {
   font-family: 'Roboto Mono', monospace;
-  background-color: black;
+  background-color: whitesmoke;
 }
 
 .webtitle {
   font-family: 'Roboto Mono', monospace;
-color: whitesmoke;
+  color: rgb(77, 77, 77);
 }
 
 a {
@@ -24,7 +24,7 @@ nav a {
   display: inline-block;
   margin: 1em;
   font-family: 'Roboto Mono', monospace;
-  color:white;
+  color: rgb(77, 77, 77);
 }
 a:active {
   color: rgb(77, 77, 77);
@@ -70,7 +70,7 @@ video {
   max-width: 100%;
   height: auto;
   font-family: 'Roboto Mono', monospace;
-  color: white;
+  color: rgb(77, 77, 77);
   padding-top: 500px;
   flex-basis: calc(50% - 10px); /* 50% width with 10px of margin on each side */
   margin: 0 10px;
@@ -78,7 +78,7 @@ video {
 
 .single-coffee{
   font-family: 'Roboto Mono', monospace;
-  color: white;
+  color:  rgb(77, 77, 77);
 }
 
 
