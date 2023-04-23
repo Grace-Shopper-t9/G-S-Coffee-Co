@@ -4,7 +4,10 @@ import { NavLink } from "react-router-dom";
 const about = () => {
   return (
     <div id="about" className="column">
-      <h1>React Coffee</h1>
+      <h1>
+        The perfect fuel for developers, designers, and anyone who's passionate
+        about creating amazing things.
+      </h1>
       <p>
         React Coffee is a premium coffee roaster that's dedicated to crafting
         the perfect cup of coffee. We believe that coffee is more than just a
@@ -27,7 +30,7 @@ const about = () => {
         journey of discovery and taste the difference with React Coffee.
       </p>
       <div className="containeraboutimg">
-        <img className="coffee-img" src="3.png"></img>
+        <img className="coffee-img" src="2.png"></img>
       </div>
     </div>
   );
