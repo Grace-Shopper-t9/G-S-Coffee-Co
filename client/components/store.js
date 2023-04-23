@@ -8,7 +8,7 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
     coffees: coffeeSlice,
-    singlecoffee: singleCoffeeSlice,
+    singleCoffee: singleCoffeeSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

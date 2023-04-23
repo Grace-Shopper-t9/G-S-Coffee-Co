@@ -6,6 +6,7 @@ import Home from "./Home";
 import About from "./About";
 import { me } from "./store";
 import SingleCoffee from "./SingleCoffee";
+import { fetchCoffeesAsync } from "../features/allCoffees/coffeeSlice";
 
 /**
  * COMPONENT
@@ -17,6 +18,7 @@ const AppRoutes = () => {
 
   useEffect(() => {
     dispatch(me());
+    dispatch(fetchCoffeesAsync());
   }, []);
 
   return (

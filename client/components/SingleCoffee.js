@@ -9,31 +9,30 @@ import {
 const singleCoffee = () => {
   const { coffeeId } = useParams();
   const dispatch = useDispatch();
+
+  const coffee = useSelector(selectSingleCoffee);
+
   console.log(coffeeId);
 
   //   const handleAddToCart = ({ coffeeId: id }) => {
   //     dispatch(id);
   //   };
-  const coffee = useSelector(selectSingleCoffee);
-  useEffect(() => {
-    console.log(dispatch(fetchSingleCoffee(coffeeId)));
-  }, [dispatch]);
 
-  console.log(coffee);
+  useEffect(() => {
+    console.log("fetching coffee data...");
+    dispatch(fetchSingleCoffee(coffeeId));
+  }, [dispatch, coffeeId]);
+  console.log("coffee:", coffee);
+
   return (
     <div>
       <h1>hello</h1>
       {coffee ? (
         <div>
+          why is this not rendering??
           <div key={`single coffee ${coffee.id}`}>
-            {/* {`${coffee.id}} */}
             <h3>{coffee.name}</h3>
             <h3>{coffee.description} </h3>
-            {/* <img className="coffee-img" src={coffee.imageUrl}></img> */}
-
-            {/* <button onClick={() => handleAddToCart(coffee.id)}>
-              add to cart
-            </button> */}
           </div>
         </div>
       ) : (
@@ -44,3 +43,13 @@ const singleCoffee = () => {
 };
 
 export default singleCoffee;
+
+// {
+/* <img className="coffee-img" src={coffee.imageUrl}></img> */
+// }
+
+// {
+/* <button onClick={() => handleAddToCart(coffee.id)}>
+              add to cart
+            </button> */
+// }
