@@ -19,7 +19,6 @@ const Cart = () => {
   const user = useSelector((state) => state.cart.user);
 
   const orderState = user ? useSelector((state) => state.cart.order) : null;
-  // console.log(orderState);
   const userCartItems = orderState
     ? useSelector((state) => state.cart.coffee)
     : null;
