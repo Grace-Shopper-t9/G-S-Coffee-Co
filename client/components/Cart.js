@@ -53,7 +53,7 @@ const Cart = () => {
     <div>
       <h1>{username}'s Cart</h1>
       <ul>
-        {userCartItems.length !== 0 ? (
+        {userCartItems.length !== 0 && !orderState.fulfilled ? (
           userCartItems.map((coffee) => (
             <li key={coffee.id}>
               <h1>OrderId :{orderId}</h1>
@@ -72,7 +72,7 @@ const Cart = () => {
           <h1>Add Coffee to your Cart</h1>
         )}
       </ul>
-      {userCartItems.length !== 0 ? (
+      {userCartItems.length !== 0 && !orderState.fulfilled ? (
         <button onClick={() => handleCheckout(orderId)}>checkout</button>
       ) : (
         <div></div>

@@ -6,10 +6,5 @@ const Orders = db.define("orders", {
     type: Sequelize.ENUM("true", "false"),
     defaultValue: "false",
   },
-  // userId: {
-  //   type: Sequelize.INTEGER,
-  //   unique: true,
-  //   allowNull: false,
-  // },
 });
 module.exports = Orders;

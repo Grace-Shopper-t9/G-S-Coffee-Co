@@ -5,12 +5,6 @@ const Coffee = require("../db/models/Coffee");
 const Orders = require("../db/models/Orders");
 module.exports = router;
 
-//once relationships are defined we need a function here that checks the cart
-//belongs to the user that is accessing and making changes to it.
-//I do have an idea of how the cart can be user specific it involves passing
-//fkey userId and checking it agaisnt included model User Id so I've
-//written it down below once we can test routes and front end
-
 router.get("/", async (req, res, next) => {
   try {
     const cart = await Cart.findAll({
@@ -34,7 +28,6 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-//so we don't need to create a cart
 router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(

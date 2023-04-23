@@ -7,41 +7,6 @@ const {
   models: { User, Coffee, Cart, Orders },
 } = require("../server/db/");
 
-// const seed = async () => {
-//   try {
-//     await db.sync({ force: true });
-
-//     const users = [
-//       {
-//         username: "Jane Smith",
-//         password: "1234",
-//       },
-//       {
-//         username: "John Doe",
-//         password: "4321",
-//       },
-//       {
-//         username: "Tom",
-//         password: "Tom",
-//         admin: true,
-//       },
-//     ];
-
-//     await Promise.all(
-//       users.map((user) => {
-//         return User.create(user);
-//       })
-//     );
-
-//     console.log("Seeding success!");
-//     db.close();
-//   } catch (err) {
-//     console.error("Failed to Seed");
-//     console.error(err);
-//     db.close();
-//   }
-// };
-
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   console.log("db synced!");
@@ -101,7 +66,7 @@ async function seed() {
       return Coffee.create(e);
     })
   );
-  // console.log(coffee1, coffee2, coffee3);
+
   // Creating Users
   const users = [
     {

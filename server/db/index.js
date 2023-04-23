@@ -16,16 +16,6 @@ Cart.belongsTo(Orders);
 Cart.hasMany(Coffee);
 Coffee.belongsTo(Cart);
 
-// Cart.belongsTo(User);
-// User.hasOne(Cart);
-
-// Cart.hasMany(LineItem);
-// LineItem.hasOne(Cart);
-
-// LineItem.hasOne(Coffee);
-
-// Coffee.hasMany(Cart);
-
 module.exports = {
   db,
   models: {
