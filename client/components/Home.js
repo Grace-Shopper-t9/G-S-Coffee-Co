@@ -35,9 +35,8 @@ const Home = () => {
         )}
         {coffees && coffees.length ? (
           coffees.map((coffee) => (
-            <div className="allcoffeecontainer">
-              <div className="allcoffees" key={`All Coffees ${coffee.id}`}>
-                <img className="coffeeimg" src={coffee.image}></img>
+            <div className="renderingwrap">
+              <div className="allcoffees" key={coffee.id}>
                 <div className="coffeeclickurl">
                   <NavLink to={`/coffees/${coffee.id}`}>
                     <h3>{coffee.name}</h3>

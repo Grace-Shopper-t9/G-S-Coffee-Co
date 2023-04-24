@@ -31,11 +31,10 @@ const singleCoffee = () => {
       <h1></h1>
       {coffee ? (
         <div className="single-coffee">
-          <div key={`single coffee ${coffee.id}`}>
+          <div key={coffee.id}>
             <h2>{coffee.name}</h2>
             {<img className="coffeeimg" src={coffee.image}></img>}
             <h4>${coffee.price}</h4>
-            <h4>{coffee.countryOrigin}</h4>
             <h5>{coffee.roast}</h5>
             <h5>{coffee.description} </h5>
           </div>

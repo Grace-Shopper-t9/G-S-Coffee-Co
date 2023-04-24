@@ -28,7 +28,8 @@ const Coffee = db.define("coffee", {
     defaultValue: null,
   },
   quantity: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
   },
 });
 

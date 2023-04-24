@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { User },
 } = require("../db");
+const Orders = require("../db/models/Orders");
 module.exports = router;
 
 router.post("/login", async (req, res, next) => {
@@ -27,7 +28,11 @@ router.post("/signup", async (req, res, next) => {
 
 router.get("/me", async (req, res, next) => {
   try {
-    res.send(await User.findByToken(req.headers.authorization));
+    res.send(
+      await User.findByToken(req.headers.authorization, {
+        include: [Orders],
+      })
+    );
   } catch (ex) {
     next(ex);
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const about = () => {
+const About = () => {
   return (
     <div id="about" className="column">
       <h1>
@@ -36,4 +36,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;
