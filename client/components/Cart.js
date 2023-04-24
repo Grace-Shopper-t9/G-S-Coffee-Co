@@ -41,7 +41,7 @@ const Cart = () => {
   const handleCheckout = (orderId) => {
     const fulfilled = true;
     dispatch(editOrderStatusAsync({ orderId, fulfilled }));
-    navigate("/");
+    navigate("/VerPurchase");
   };
   const handleRemoveItem = (coffeeId) => {
     const cartId = null;

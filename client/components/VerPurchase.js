@@ -1,34 +1,67 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { selectCart, fetchCartAsync } from "../features/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
+import {
+  fetchOneCartAsync,
+  fetchOneOrderAsync,
+  fetchUserAsync,
+  editOrderStatusAsync,
+} from "../features/cart/cartSlice";
 
 const VerPurchase = () => {
-  const { cartId } = useParams();
+  const loggedInUserID = useSelector((state) => state.auth.me.id);
+  const username = useSelector((state) => state.auth.me.username);
 
   const dispatch = useDispatch();
 
-  const cart = useSelector(selectCart);
+  const user = useSelector((state) => state.cart.user);
+  console.log(user, loggedInUserID);
+  const orderState = user ? useSelector((state) => state.cart.order) : null;
+  const userCartItems = orderState
+    ? useSelector((state) => state.cart.coffee)
+    : null;
+
+  const { order } = user;
+  let orderId = null;
+  order ? (orderId = order.id) : null;
+  //cart from state
+  const { cart } = orderState;
+  let cartId = null;
+  cart ? (cartId = cart.id) : null;
 
   useEffect(() => {
-    dispatch(fetchCartAsync(cartId));
-  }, [dispatch]);
+    if (loggedInUserID) {
+      dispatch(fetchUserAsync(loggedInUserID));
+    }
+    if (orderId) {
+      dispatch(fetchOneOrderAsync(orderId));
+    }
+    if (cartId) {
+      dispatch(fetchOneCartAsync(cartId));
+    }
+  }, [dispatch, loggedInUserID, orderId, cartId]);
 
   return (
     <div>
-      <h1>You're Buying</h1>
+      <h1>{username} You've bought</h1>
       <ul>
-        {cart ? (
-          <li key={cart.id}>
-            <h3>{cart.coffeeId}</h3>
-            <h3>{cart.orderId}</h3>
-          </li>
+        {userCartItems &&
+        userCartItems.length !== 0 &&
+        orderState &&
+        orderState.fulfilled === "true" ? (
+          userCartItems.map((coffee) => (
+            <li key={coffee.id}>
+              <h1>name:{coffee.name}</h1>
+              <h1>price:{coffee.price}</h1>
+              <h1>quantity:{coffee.quantity}</h1>
+              <h1>total: ${coffee.price * coffee.quantity}</h1>
+            </li>
+          ))
         ) : (
-          <h2>Would you like to complete transaction?</h2>
+          <div>Would you like to continue with the purchase</div>
         )}
       </ul>
-
-      <button>Complete Transaction</button>
     </div>
   );
 };

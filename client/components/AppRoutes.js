@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
@@ -8,6 +9,7 @@ import { me } from "./store";
 import SingleCoffee from "./SingleCoffee";
 import { fetchCoffeesAsync } from "../features/allCoffees/coffeeSlice";
 import Cart from "./Cart";
+import VerPurchase from "./VerPurchase";
 
 /**
  * COMPONENT
@@ -32,6 +34,7 @@ const AppRoutes = () => {
           <Route path="/coffees/:coffeeId" element={<SingleCoffee />} />
           <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/VerPurchase" element={<VerPurchase />} />
         </Routes>
       ) : (
         <Routes>
@@ -43,6 +46,7 @@ const AppRoutes = () => {
             path="/"
             element={<AuthForm name="login" displayName="Login" />}
           />
+          <Route path="/VerPurchase" element={<VerPurchase />} />
           <Route path="/cart" element={<Cart />} />
 
           <Route path="/*" element={<Home />} />
