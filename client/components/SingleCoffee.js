@@ -9,23 +9,22 @@ import {
 const singleCoffee = () => {
   const { coffeeId } = useParams();
   const dispatch = useDispatch();
-
   const coffee = useSelector(selectSingleCoffee);
 
-  //   const updateCartHandler = (id, value) => {
-  //     let updatedCart = cart.map(item => item.id === id ? item.quantity += value : item)
+  // const handleIncrement = (coffee.id) => {
+  //   updateCart(coffee => coffee.map(item => coffee.id === item.id ? coffee.qty += value : coffee)
 
-  //     setCart(updatedCart)}
+  //   handleIncrement(updateCart)}
 
-  //   const handleAddToCart = ({ coffeeId: id }) => {
-  //     dispatch(id);
-  //   };
+  const handleAddToCart = ({ coffeeId: id }) => {
+    dispatch(id);
+  };
 
   useEffect(() => {
     console.log("fetching coffee data...");
     dispatch(fetchSingleCoffee(coffeeId));
   }, [dispatch, coffeeId]);
-  console.log("coffee:", coffee);
+  //   console.log("coffee:", coffee);
 
   return (
     <div>
@@ -33,27 +32,30 @@ const singleCoffee = () => {
       {coffee ? (
         <div className="single-coffee">
           <div key={`single coffee ${coffee.id}`}>
-            <h3>{coffee.name}</h3>
-            <h5>{coffee.description} </h5>
-            <h4>$ {coffee.price}</h4>
+            <h2>{coffee.name}</h2>
+            {<img className="coffeeimg" src={coffee.image}></img>}
+            <h4>${coffee.price}</h4>
             <h4>{coffee.countryOrigin}</h4>
             <h5>{coffee.roast}</h5>
+            <h5>{coffee.description} </h5>
           </div>
-          {<img className="coffee-img" src={coffee.imageUrl}></img>}
-          {
-            <button onClick={() => handleAddToCart(coffee.id)}>
-              add to cart
-            </button>
-          }
-          <div>
-            <button onClick={() => props.handleIncrement(coffee.id, +1)}>
-              -
-            </button>
-            {coffee.qty}
-            <span>{coffee.qty === 1 ? coffee.qty : coffee.qty}</span>
-            <button onClick={() => props.handleDecrement(coffee.id, -1)}>
-              +
-            </button>
+
+          <div className="incrementaddbutton">
+            {
+              <button onClick={() => handleAddToCart(coffee.id)}>
+                add to cart
+              </button>
+            }
+            <div>
+              <button onClick={() => props.handleDecrement(coffee.id, +1)}>
+                -
+              </button>
+              {coffee.qty}
+              <span>{coffee.qty === 1 ? coffee.qty : coffee.qty}</span>
+              <button onClick={() => props.handleIncrement(coffee.id, -1)}>
+                +
+              </button>
+            </div>
           </div>
         </div>
       ) : (

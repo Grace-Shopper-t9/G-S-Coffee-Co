@@ -22,9 +22,11 @@ const Coffee = db.define("coffee", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  // display: {
-  //   Image,                     //future\\
-  // },
+  image: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+    defaultValue: null,
+  },
   quantity: {
     type: Sequelize.STRING,
   },

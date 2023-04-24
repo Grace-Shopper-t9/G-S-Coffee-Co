@@ -89,22 +89,22 @@ video {
 
 .containeraboutimg {
   position: relative;
-  width: 30%;
+  width: 20%;
   height: 300px;
   margin: 0 auto;
 }
 
-.coffee-img {
-  max-width: 100%;
+.coffeeimg {
+  max-width: 20%;
   height: auto;
   float: left;
   margin: 0 1em 1em 0;
 }
 
-.coffee-img:after {
-  content: "";
-  display: table;
-  clear: both;
+.allcoffeecontainer {
+  display: flex;
+  flex-wrap: wrap;
 }
-
-
+.allcoffeecontainer>* {
+  flex: 1 1 160px;
+}

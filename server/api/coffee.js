@@ -14,6 +14,7 @@ router.get("/", async (req, res, next) => {
         "price",
         "roast",
         "description",
+        "image",
       ],
     });
     res.json(coffees);

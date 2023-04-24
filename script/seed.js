@@ -51,7 +51,8 @@ async function seed() {
     description: "The perfect SIP of REACT with a kick of TION.",
     price: 19,
     roast: "Dark Roast",
-    image: "",
+    image:
+      "/Users/veronica-creative/Desktop/Senior-Phase/G-S-Coffee-Co/public/rjblend.png",
   });
 
   const FULLSTACKUS = await Coffee.create({
@@ -59,9 +60,10 @@ async function seed() {
     countryOrigin: "Honduras",
     description:
       "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
-    price: 35,
+    price: 19,
     roast: "Medium",
-    image: "",
+    image:
+      "f/Users/veronica-creative/Desktop/Senior-Phase/G-S-Coffee-Co/public/fjblend.png",
   });
   // const users = await Promise.all([
   //   User.create({ username: "cody", password: "123" }),
