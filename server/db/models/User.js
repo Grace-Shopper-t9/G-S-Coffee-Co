@@ -14,8 +14,8 @@ const User = db.define("users", {
   password: {
     type: Sequelize.STRING,
   },
-  admin: {
-    type: Sequelize.ENUM("true", "false"),
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
   },
   email: {
     type: Sequelize.STRING,
@@ -54,6 +54,7 @@ User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id);
+    console.log(user);
     if (!user) {
       throw "nooo";
     }

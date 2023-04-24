@@ -80,7 +80,7 @@ async function seed() {
     {
       username: "Tom",
       password: "Tom",
-      admin: true,
+      isAdmin: true,
     },
   ];
 
