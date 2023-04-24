@@ -13,35 +13,32 @@ async function seed() {
 
   const allcoffees = [
     {
-      name: "REACTO-JAMPACTO",
-      countryOrigin: "Columbian",
+      name: "Reacto-Jampacto",
+      countryOrigin: "Colombia",
       description: "The perfect SIP of REACT with a kick of TION.",
       price: 19,
       roast: "Dark Roast",
-      image:
-        "/Users/veronica-creative/Desktop/Senior-Phase/G-S-Coffee-Co/public/rjblend.png",
+      image: "fjblend.png",
       quantity: 3,
     },
     {
-      name: "THE FULLSTACKUS JAMPACTUS",
+      name: "Fullstackus-Jampactus",
       countryOrigin: "Honduras",
       description:
         "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
       price: 35,
       roast: "Medium",
-      image:
-        "/Users/veronica-creative/Desktop/Senior-Phase/G-S-Coffee-Co/public/fjblend.png",
+      image: "fjblend.png",
       quantity: 2,
     },
     {
-      name: "THE FULLSTACKUS JAMPACTUS SPECIAL",
+      name: "The Fullstackus Jampactus SPECIAL",
       countryOrigin: "Buenos Aires",
       description:
         "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
       price: 50,
       roast: "Medium",
-      image:
-        "/Users/veronica-creative/Desktop/Senior-Phase/G-S-Coffee-Co/public/fjblend.png",
+      image: "fjblend.png",
       quantity: 4,
     },
   ];

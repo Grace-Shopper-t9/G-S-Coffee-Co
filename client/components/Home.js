@@ -21,34 +21,34 @@ const Home = () => {
 
   return (
     <div>
-      <div className="container">
-        <video src="/reactcoffeeroaster.mp4" autoPlay muted loop></video>
-      </div>
-      <div id="allcoffees" className="coffeeColumn">
-        {username ? (
-          <h3>Welcome, {username}</h3>
-        ) : (
-          <h3>
-            glad to see you here checking out our coffee blends for the fuel you
-            need as a creative!
-          </h3>
-        )}
-        {coffees && coffees.length ? (
-          coffees.map((coffee) => (
-            <div className="renderingwrap">
+      <div id="allcoffeespage">
+        <div id="welcomediv">
+          {username ? (
+            <h3>Welcome back, {username}</h3>
+          ) : (
+            <h2>Glad you're here. Checkout our blends...</h2>
+          )}
+        </div>
+        <div className="container">
+          <video src="/reactcoffeeroaster.mp4" autoPlay muted loop></video>
+        </div>
+        <div id="allcoffees">
+          {coffees && coffees.length ? (
+            coffees.map((coffee) => (
               <div className="allcoffees" key={coffee.id}>
                 <div className="coffeeclickurl">
+                  <h4>{coffee.image}</h4>
                   <NavLink to={`/coffees/${coffee.id}`}>
                     <h3>{coffee.name}</h3>
                   </NavLink>
                 </div>
                 <h4>{coffee.price}</h4>
               </div>
-            </div>
-          ))
-        ) : (
-          <div>loading page...</div>
-        )}
+            ))
+          ) : (
+            <div>loading page...</div>
+          )}
+        </div>
       </div>
     </div>
   );
