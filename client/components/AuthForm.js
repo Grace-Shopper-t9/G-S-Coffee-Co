@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { authenticate } from "./store";
 
 /**
@@ -9,15 +10,22 @@ import { authenticate } from "./store";
 **/
 
 const AuthForm = ({ name, displayName }) => {
+  const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  // const [formName, setFormName] = useState("");
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
-    const username = evt.target.username.value;
-    const password = evt.target.password.value;
-    dispatch(authenticate({ username, password, method: formName }));
+    dispatch(authenticate({ username, password, email, method: formName }));
+    setUserName("");
+    setPassword("");
+    setEmail("");
+    navigate("/");
   };
 
   return (
@@ -27,14 +35,37 @@ const AuthForm = ({ name, displayName }) => {
           <label htmlFor="username">
             <small>Username</small>
           </label>
-          <input name="username" type="text" />
+          <input
+            name="username"
+            value={username}
+            type="text"
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <input
+            name="password"
+            value={password}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
+        {name === "signup" ? (
+          <div>
+            <label htmlFor="email">
+              <small>email</small>
+            </label>
+            <input
+              name="email"
+              value={email}
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        ) : null}
         <div>
           <button type="submit">{displayName}</button>
         </div>

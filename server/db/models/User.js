@@ -17,6 +17,10 @@ const User = db.define("users", {
   admin: {
     type: Sequelize.ENUM("true", "false"),
   },
+  email: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
 });
 
 module.exports = User;
