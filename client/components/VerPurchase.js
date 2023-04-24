@@ -10,46 +10,49 @@ import {
 } from "../features/cart/cartSlice";
 
 const VerPurchase = () => {
-  const loggedInUserID = useSelector((state) => state.auth.me.id);
-  const username = useSelector((state) => state.auth.me.username);
+  // const loggedInUserID = useSelector((state) => state.auth.me.id);
+  // const username = useSelector((state) => state.auth.me.username);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.cart.user);
-  console.log(user, loggedInUserID);
-  const orderState = user ? useSelector((state) => state.cart.order) : null;
-  const userCartItems = orderState
-    ? useSelector((state) => state.cart.coffee)
-    : null;
+  // const user = useSelector((state) => state.cart.user);
+  // console.log(user, loggedInUserID);
+  // const orderState = user ? useSelector((state) => state.cart.order) : null;
+  // const userCartItems = orderState
+  //   ? useSelector((state) => state.cart.coffee)
+  //   : null;
 
-  const { order } = user;
-  let orderId = null;
-  order ? (orderId = order.id) : null;
-  //cart from state
-  const { cart } = orderState;
-  let cartId = null;
-  cart ? (cartId = cart.id) : null;
+  // const { order } = user;
+  // let orderId = null;
+  // order ? (orderId = order.id) : null;
+  // //cart from state
+  // const { cart } = orderState;
+  // let cartId = null;
+  // cart ? (cartId = cart.id) : null;
 
-  useEffect(() => {
-    if (loggedInUserID) {
-      dispatch(fetchUserAsync(loggedInUserID));
-    }
-    if (orderId) {
-      dispatch(fetchOneOrderAsync(orderId));
-    }
-    if (cartId) {
-      dispatch(fetchOneCartAsync(cartId));
-    }
-  }, [dispatch, loggedInUserID, orderId, cartId]);
+  // useEffect(() => {
+  //   if (loggedInUserID) {
+  //     dispatch(fetchUserAsync(loggedInUserID));
+  //   }
+  //   if (orderId) {
+  //     dispatch(fetchOneOrderAsync(orderId));
+  //   }
+  //   if (cartId) {
+  //     dispatch(fetchOneCartAsync(cartId));
+  //   }
+  // }, [dispatch, loggedInUserID, orderId, cartId]);
 
   return (
     <div>
-      <h1>{username} You've bought</h1>
+      {" "}
+      Thank you for ordering from REACT COFFEE
+      {/* <h1>{username} You've bought</h1>
       <ul>
         {userCartItems &&
         userCartItems.length !== 0 &&
         orderState &&
-        orderState.fulfilled === "true" ? (
+        orderState.fulfilled === "true" &&
+        user === user ? (
           userCartItems.map((coffee) => (
             <li key={coffee.id}>
               <h1>name:{coffee.name}</h1>
@@ -59,9 +62,9 @@ const VerPurchase = () => {
             </li>
           ))
         ) : (
-          <div>Would you like to continue with the purchase</div>
+          <div>loading...</div>
         )}
-      </ul>
+      </ul> */}
     </div>
   );
 };
