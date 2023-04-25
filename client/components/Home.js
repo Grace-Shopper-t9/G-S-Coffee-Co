@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -6,18 +7,17 @@ import {
   selectCoffees,
   fetchCoffeesAsync,
 } from "../features/allCoffees/coffeeSlice";
-import { handleadminadd, handleadmindelete } from "../features/admin/AdminFunc";
+import {
+  handleadminadd,
+  handleadmindelete,
+} from "../features/admin/Adminslice";
 
-/**
- * COMPONENT
- */
 const Home = () => {
   const coffees = useSelector(selectCoffees);
   const dispatch = useDispatch();
   console.log(coffees);
   const username = useSelector((state) => state.auth.me.username);
   const admin = useSelector((state) => state.auth.me.admin);
-
   useEffect(() => {
     dispatch(fetchCoffeesAsync());
   }, [dispatch]);
@@ -48,7 +48,7 @@ const Home = () => {
                   alt={coffee.name}
                 ></img>
                 {admin ? (
-                  <button onClick={() => handleadmindelete(coffees)}>
+                  <button onClick={() => handleadmindelete()}>
                     Delete Posting
                   </button>
                 ) : (
@@ -83,7 +83,9 @@ const Home = () => {
             Stock
             <input name="Stock" type="text" />
           </h6>
-          <button onClick={() => handleadminadd(coffees)}>Add Coffee</button>
+          <button onClick={() => handleadminadd(console.log("hello"))}>
+            Add Coffee
+          </button>
         </form>
       ) : (
         <div></div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const router = require("express").Router();
 const {
   models: { Coffee },
@@ -48,10 +49,18 @@ router.put("/:coffeeid", async (req, res, next) => {
   }
 });
 router.delete("/:coffeeId", async (req, res, next) => {
-  const singleCoffee = await Coffee.findByPk(req.params.coffeeId);
   try {
-    await singleCoffee.destroy({ where: { id: Coffee } });
-    res.sendStatus(204);
+    const coffee = await Coffee.findByPk(req.param.id);
+    await coffee.destroy();
+    res.send(coffee);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/:coffeeId", async (req, res, next) => {
+  try {
+    res.status(201).send(await Coffee.create(req.body));
   } catch (error) {
     next(error);
   }
