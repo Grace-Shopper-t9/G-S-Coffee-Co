@@ -10,9 +10,15 @@ export const fetchOneCartAsync = createAsyncThunk("/carts", async (cartId) => {
 export const fetchOneOrderAsync = createAsyncThunk(
   "/orders",
   async ({ orderId, userId }) => {
-    const { data } = await axios.get(`/api/orders/${orderId}`, {
+    console.log(
+      "stuff the api is receiveing from axios request:",
+      "userId: ",
       userId,
-    });
+      "orderId: ",
+      orderId
+    );
+    const { data } = await axios.get(`/api/orders/${orderId}`, userId);
+    console.log(data);
     return data;
   }
 );

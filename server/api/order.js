@@ -19,33 +19,43 @@ router.get("/", async (req, res, next) => {
 // GET /api/orders/:orderID
 router.get("/:orderId", async (req, res, next) => {
   try {
-    // console.log(
-    //   "lsdjflkjsdlkjflsdjflsdjflkjsdfjsdjfljs: ",
-    //   req.params.orderId,
-    //   req.body
-    // );
-    const [singleOrder, created] = await Orders.findOrCreate(
+    console.log(
+      "req.params.orderId: ",
+      req.params.orderId,
+      "req.body: ",
       req.body,
-      // req.params.orderId,
-      // req.params.orderId,
-      // req.body,
-      console.log(req.body),
+      "req.headers.authorization: ",
+      req.headers.authorization
+    );
+    const [singleOrder, created] = await Orders.findOrCreate(
+      req.params.orderId,
+      req.body,
       {
         where: {
-          id: "user's order Id",
+          id: req.params.orderId,
         },
         defaults: {
-          userId: "userid ",
+          userId: req.body.userId,
           fulfilled: "false",
         },
         include: [Cart],
       }
     );
+    if (created) {
+      console.log("new order create", created);
+    }
     res.json(singleOrder);
   } catch (error) {
     next(error);
   }
 });
+
+// ModelName.findOrCreate({
+//   // Conditions that must be met
+//   where: { firstColumn: "lorem ipsum" },
+//   // Value of other columns to be set if no such row found
+//   defaults: { secondColumn: "dotor" },
+// }).then(([result, created]) => {});
 
 // router.post("/", async (req, res, next) => {
 //   try {

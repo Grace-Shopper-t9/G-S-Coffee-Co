@@ -10,7 +10,7 @@ const Orders = require("./models/Orders");
 User.hasOne(Orders);
 Orders.belongsTo(User);
 
-Orders.hasOne(Cart);
+Orders.hasMany(Cart);
 Cart.belongsTo(Orders);
 
 Cart.hasMany(Coffee);
