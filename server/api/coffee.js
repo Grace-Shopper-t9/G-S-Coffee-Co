@@ -47,5 +47,14 @@ router.put("/:coffeeid", async (req, res, next) => {
     next(error);
   }
 });
+router.delete("/:coffeeId", async (req, res, next) => {
+  const singleCoffee = await Coffee.findByPk(req.params.coffeeId);
+  try {
+    await singleCoffee.destroy({ where: { id: Coffee } });
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
