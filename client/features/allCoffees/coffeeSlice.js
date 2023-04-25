@@ -4,7 +4,6 @@ import axios from "axios";
 export const fetchCoffeesAsync = createAsyncThunk("All coffees", async () => {
   try {
     const { data } = await axios.get(`/api/coffees`);
-    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
@@ -17,7 +16,6 @@ const coffeeSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchCoffeesAsync.fulfilled, (state, action) => {
-      console.log(action.payload);
       return action.payload;
     });
   },

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { User, Orders, Cart, Coffee },
 } = require("../db");
+const { requireToken, isAdmin } = require("./gateKeeping");
 module.exports = router;
 
 router.get("/", async (req, res, next) => {
