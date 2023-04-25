@@ -17,8 +17,10 @@ export const fetchOneOrderAsync = createAsyncThunk(
       "orderId: ",
       orderId
     );
-    const { data } = await axios.get(`/api/orders/${orderId}`, userId);
-    console.log(data);
+    const { data } = await axios.put(`/api/orders/${orderId}`, {
+      USERID: `${userId}`,
+    });
+    // console.log(data);
     return data;
   }
 );

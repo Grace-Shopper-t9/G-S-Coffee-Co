@@ -29,6 +29,7 @@ const Cart = () => {
   order ? (orderId = order.id) : null;
   //cart from state
   const { cart } = orderState;
+  console.log(cart, orderState);
   let cartId = null;
   cart ? (cartId = cart.id) : null;
 
@@ -40,7 +41,9 @@ const Cart = () => {
       "userId:",
       userId,
       "orderId:",
-      orderId
+      orderId,
+      "cartId:",
+      cartId
     );
     dispatch(fetchOneOrderAsync({ orderId, userId }));
     dispatch(fetchOneCartAsync(cartId));
