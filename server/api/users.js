@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
-router.get("/:id", requireToken, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id, {
       attributes: ["id", "username"],

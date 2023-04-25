@@ -17,7 +17,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.cart.user);
-
+  console.log(loggedInUserID);
   const orderState = user ? useSelector((state) => state.cart.order) : null;
   const userCartItems = orderState
     ? useSelector((state) => state.cart.coffee)
@@ -34,7 +34,7 @@ const Cart = () => {
 
   useEffect(() => {
     loggedInUserID ? dispatch(fetchUserAsync(loggedInUserID)) : null;
-    dispatch(fetchOneOrderAsync(orderId));
+    dispatch(fetchOneOrderAsync({ orderId, loggedInUserID }));
     dispatch(fetchOneCartAsync(cartId));
   }, [dispatch, loggedInUserID, orderId, cartId]);
 

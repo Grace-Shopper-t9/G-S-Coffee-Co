@@ -12,7 +12,7 @@ import {
 const Home = () => {
   const coffees = useSelector(selectCoffees);
   const dispatch = useDispatch();
-  console.log(coffees);
+
   const username = useSelector((state) => state.auth.me?.username);
 
   useEffect(() => {
