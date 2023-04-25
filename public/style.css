@@ -76,7 +76,21 @@ video {
   font-family:'Roboto', sans-serif;
   color:whitesmoke;
   font-size: 20px;
-  margin: 10px;
+  margin: 0px;
+}
+
+#allcoffees h2{
+  font-family:'Roboto', sans-serif;
+  color:whitesmoke;
+  font-size: 45px;
+  margin-top: 85px;
+}
+
+#allcoffees h4{
+  display: flex;
+  align-content: center;
+  font-size: 16px;
+  margin-top: 0px;
 }
 
 .coffeeclickurl:active {
@@ -94,6 +108,8 @@ video {
   align-items: center;
 }
 
+
+
 /* login/signup */
 
 form div {
@@ -107,10 +123,42 @@ form div {
 /* single coffee page */
 
 .single-coffee{
+  display:flex;
+  flex-wrap: wrap;
   font-family: 'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   color:  whitesmoke;
+  margin-left: 10px;
+}
 
+.icrementaddbutton{
+  color:bisque;
+  font-family: "Roboto-mono", monospace;
+  font-size: 10px;
+  display: inline;
+}
+
+.single-coffee {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.coffee-details {
+  width: 50%;
+  margin:0;
+}
+
+.incrementaddbutton {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
 }
 
 /* about page */

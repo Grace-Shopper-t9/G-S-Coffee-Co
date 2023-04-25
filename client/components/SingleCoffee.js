@@ -28,32 +28,36 @@ const singleCoffee = () => {
 
   return (
     <div>
-      <h1></h1>
       {coffee ? (
         <div className="single-coffee">
-          <div key={coffee.id}>
-            <h2>{coffee.name}</h2>
-            {<img className="coffeeimg" src={coffee.image}></img>}
-            <h4>${coffee.price}</h4>
-            <h5>{coffee.roast}</h5>
-            <h5>{coffee.description} </h5>
+          <div className="coffee-details">
+            <p>lets get you fueled up!</p>
+            <div key={coffee.id}>
+              {<img className="coffeeimg" src={coffee.imageUrl}></img>}
+              <h4>${coffee.price}</h4>
+              <h2>{coffee.name}</h2>
+              <h5>{coffee.description} </h5>
+              <h5>{coffee.roast} roast</h5>
+            </div>
           </div>
 
           <div className="incrementaddbutton">
-            {
-              <button onClick={() => handleAddToCart(coffee.id)}>
-                add to cart
-              </button>
-            }
-            <div>
-              <button onClick={() => props.handleDecrement(coffee.id, +1)}>
-                -
-              </button>
-              {coffee.qty}
-              <span>{coffee.qty === 1 ? coffee.qty : coffee.qty}</span>
-              <button onClick={() => props.handleIncrement(coffee.id, -1)}>
-                +
-              </button>
+            <div className="coffee-details">
+              {
+                <button onClick={() => handleAddToCart(coffee.id)}>
+                  add to cart
+                </button>
+              }
+              <div>
+                <button onClick={() => props.handleDecrement(coffee.id, +1)}>
+                  -
+                </button>
+                {coffee.qty}
+                <span>{coffee.qty === 1 ? coffee.qty : coffee.qty}</span>
+                <button onClick={() => props.handleIncrement(coffee.id, -1)}>
+                  +
+                </button>
+              </div>
             </div>
           </div>
         </div>

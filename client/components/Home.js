@@ -37,12 +37,12 @@ const Home = () => {
             coffees.map((coffee) => (
               <div className="allcoffees" key={coffee.id}>
                 <div className="coffeeclickurl">
-                  <h4>{coffee.image}</h4>
                   <NavLink to={`/coffees/${coffee.id}`}>
+                    <img className="coffeephoto" src={coffee.imageUrl}></img>
                     <h3>{coffee.name}</h3>
                   </NavLink>
                 </div>
-                <h4>{coffee.price}</h4>
+                <h4>${coffee.price}</h4>
               </div>
             ))
           ) : (

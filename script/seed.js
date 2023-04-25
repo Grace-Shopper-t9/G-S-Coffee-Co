@@ -18,7 +18,8 @@ async function seed() {
       description: "The perfect SIP of REACT with a kick of TION.",
       price: 19,
       roast: "Dark Roast",
-      image: "fjblend.png",
+      imageUrl:
+        "https://live.staticflickr.com/65535/52844552649_9514ff0686.jpg",
       quantity: 3,
     },
     {
@@ -28,7 +29,8 @@ async function seed() {
         "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
       price: 35,
       roast: "Medium",
-      image: "fjblend.png",
+      imageUrl:
+        "https://live.staticflickr.com/65535/52844812888_0b9716ca05.jpg",
       quantity: 2,
     },
     {
@@ -38,8 +40,8 @@ async function seed() {
         "THE FULL approach of STACK with kick of JAMPACTing energy for your procrastination",
       price: 50,
       roast: "Medium",
-      image: "fjblend.png",
-      quantity: 4,
+      imageUrl:
+        "https://live.staticflickr.com/65535/52844812888_0b9716ca05.jpg",
     },
   ];
 
