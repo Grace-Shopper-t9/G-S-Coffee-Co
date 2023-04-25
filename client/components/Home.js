@@ -18,6 +18,7 @@ const Home = () => {
   console.log(coffees);
   const username = useSelector((state) => state.auth.me.username);
   const admin = useSelector((state) => state.auth.me.admin);
+
   useEffect(() => {
     dispatch(fetchCoffeesAsync());
   }, [dispatch]);
@@ -31,7 +32,7 @@ const Home = () => {
         {username ? <h3>Welcome, {username}</h3> : <h3>Welcome, Guest</h3>}
         {coffees && coffees.length ? (
           coffees.map((coffee) => (
-            <div className="renderingwrap">
+            <div key={coffee.id} className="renderingwrap">
               <div className="allcoffees" key={coffee.id}>
                 <div className="coffeeclickurl">
                   <NavLink to={`/coffees/${coffee.id}`}>
