@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = [];
+const initialState = { coffee: [], cart: [] };
 
 export const fetchSingleCoffee = createAsyncThunk(
   "/coffees/singlecoffee",
@@ -17,8 +17,24 @@ export const fetchSingleCoffee = createAsyncThunk(
   }
 );
 
+
 // export const fetchAddCoffee = createAsyncThunk("Add Coffees", async () => {
 //   async ()= {}
+
+export const fetchAddToCart = createAsyncThunk(
+  "add to cart",
+  async ({ id, cartId }) => {
+    try {
+      const { data } = await axios.post(`/api/coffees/${id}`, { cartId });
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+// export const fetchIncrement = createAsyncThunk("AddToCart", async () => {
+
 //   try {
 //     const { data } = await axios.post(`/api/coffees/${id}`);
 //     return data;
@@ -26,18 +42,6 @@ export const fetchSingleCoffee = createAsyncThunk(
 //     console.log(err);
 //   }
 // });
-
-// export const fetchUpdateCoffee = createAsyncThunk(
-//   "Update Coffee",
-//   async (id) => {
-//     try {
-//       const { data } = await axios.post(`/api/coffees/${id}`);
-//       return data;
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-// );
 
 const singleCoffeeSlice = createSlice({
   name: "singleCoffee",
@@ -47,9 +51,18 @@ const singleCoffeeSlice = createSlice({
     builder.addCase(fetchSingleCoffee.fulfilled, (state, action) => {
       return action.payload;
     });
-    // builder.addCase(fetchAddCoffee.fulfilled, (state, action) => {
-    //   state.push(action.payload);
-    // });
+    builder.addCase(fetchAddToCart.fulfilled, (state, action) => {
+      state.cart(action.payload);
+    });
+    builder.addCase(fetchAddToCart.rejected, (state, action) => {
+      state.loading = false;
+      state.error = null;
+    });
+
+    // const newState = state.coffee.filter(
+    //   (coffee) => coffee.id !== action.payload.id
+    // );
+    // state.coffee = newState;
     // builder.addCase(fetchUpdateCoffee.fulfilled, (state, action) => {
     //   return { ...state, ...action.payload };
     // });

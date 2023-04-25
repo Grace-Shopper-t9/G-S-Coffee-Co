@@ -9,6 +9,10 @@ export const fetchOneCartAsync = createAsyncThunk("/carts", async (cartId) => {
 });
 export const fetchOneOrderAsync = createAsyncThunk(
   "/orders",
+
+  async (orderId) => {
+    const { data } = await axios.get(`/api/orders/${orderId}`);
+
   async ({ orderId, userId }) => {
     console.log(
       "stuff the api is receiveing from axios request:",
@@ -55,6 +59,8 @@ export const removeItemFromCartAsync = createAsyncThunk(
     }
   }
 );
+
+=======
 // export const addOrderToNewUserAsync = createAsyncThunk(
 //   "order/addOrderToNewUser",
 //   async () => {
@@ -63,6 +69,7 @@ export const removeItemFromCartAsync = createAsyncThunk(
 //     return data;
 //   }
 // );
+
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -87,6 +94,7 @@ export const cartSlice = createSlice({
       );
       state.coffee = newState;
     });
+
     // builder.addCase(addOrderToNewUserAsync.fulfilled, (state, action) => {
     //   state.order = action.payload;
     // });

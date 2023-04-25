@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1 className="webtitle">React Coffee</h1>
+      <img className="logo" src="faveicoimage.png"></img>
       <nav>
         {isLoggedIn ? (
           <div>
@@ -38,7 +38,6 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-      <hr />
     </div>
   );
 };
