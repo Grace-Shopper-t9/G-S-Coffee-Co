@@ -12,7 +12,7 @@ import {
 const Home = () => {
   const coffees = useSelector(selectCoffees);
   const dispatch = useDispatch();
-  console.log(coffees);
+
   const username = useSelector((state) => state.auth.me?.username);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ const Home = () => {
 
   return (
     <div>
+
       <div id="allcoffeespage">
         <div id="welcomediv">
           {username ? (
@@ -35,6 +36,14 @@ const Home = () => {
         <div id="allcoffees">
           {coffees && coffees.length ? (
             coffees.map((coffee) => (
+      <div className="container">
+        <video src="/reactcoffeeroaster.mp4" autoPlay muted loop></video>
+      </div>
+      <div id="allcoffees" className="coffeeColumn">
+        {username ? <h3>Welcome, {username}</h3> : <h3>Welcome, Guest</h3>}
+        {coffees && coffees.length ? (
+          coffees.map((coffee) => (
+            <div key={coffee.id} className="renderingwrap">
               <div className="allcoffees" key={coffee.id}>
                 <div className="coffeeclickurl">
                   <NavLink to={`/coffees/${coffee.id}`}>
