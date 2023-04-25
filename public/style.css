@@ -7,18 +7,13 @@ body {
   background-color: black;
 }
 
-.webtitle {
-  font-family: 'Roboto', sans-serif;
-  color: rgb(77, 77, 77);
-}
-
 a {
   text-decoration: none;
 }
+
 a:visited {
   color: whitesmoke;
 }
-
 
 label {
   display: block;
@@ -47,7 +42,7 @@ nav a {
 }
 
 a:active {
-  color: rgb(77, 77, 77);
+  color: greenyellow;
 }
 
 .container {
@@ -160,6 +155,7 @@ form div {
   display: flex;
   align-items: center;
 }
+
 
 /* about page */
 

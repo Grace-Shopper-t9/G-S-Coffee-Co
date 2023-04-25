@@ -38,6 +38,7 @@ router.get("/:coffeeId", async (req, res, next) => {
     next(error);
   }
 });
+
 router.put("/:coffeeid", async (req, res, next) => {
   try {
     const singleCoffee = await Coffee.findByPk(req.params.coffeeid, {
@@ -48,5 +49,16 @@ router.put("/:coffeeid", async (req, res, next) => {
     next(error);
   }
 });
+
+// router.put("/cart", async (req, res, next) => {
+//   try {
+//     const item = req.body.item;
+//     req.session.cart = req.session.cart || [];
+//     req.session.cart.push(item);
+//     res.status(201).send("Item added to cart");
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = router;
