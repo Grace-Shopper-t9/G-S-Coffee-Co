@@ -17,6 +17,10 @@ export const fetchSingleCoffee = createAsyncThunk(
   }
 );
 
+
+// export const fetchAddCoffee = createAsyncThunk("Add Coffees", async () => {
+//   async ()= {}
+
 export const fetchAddToCart = createAsyncThunk(
   "add to cart",
   async ({ id, cartId }) => {
@@ -30,6 +34,7 @@ export const fetchAddToCart = createAsyncThunk(
 );
 
 // export const fetchIncrement = createAsyncThunk("AddToCart", async () => {
+
 //   try {
 //     const { data } = await axios.post(`/api/coffees/${id}`);
 //     return data;

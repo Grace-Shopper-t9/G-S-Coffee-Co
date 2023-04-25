@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -57,7 +58,7 @@ const Cart = () => {
   const handleCheckout = (orderId) => {
     const fulfilled = true;
     dispatch(editOrderStatusAsync({ orderId, fulfilled }));
-    navigate("/");
+    navigate("/VerPurchase");
   };
   const handleRemoveItem = (coffeeId) => {
     const cartId = null;
