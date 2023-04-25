@@ -29,12 +29,17 @@ const Cart = () => {
   order ? (orderId = order.id) : null;
   //cart from state
   const { cart } = orderState;
+
   console.log(cart, orderState);
+
   let cartId = null;
   cart ? (cartId = cart.id) : null;
 
   useEffect(() => {
     loggedInUserID ? dispatch(fetchUserAsync(loggedInUserID)) : null;
+
+    dispatch(fetchOneOrderAsync(orderId));
+
     const userId = loggedInUserID;
     console.log(
       "component is sending:",

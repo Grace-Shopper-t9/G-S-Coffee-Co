@@ -24,6 +24,13 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// GET /api/coffee/:orderID
+router.get("/:orderId", async (req, res, next) => {
+  try {
+    const singleOrder = await Orders.findByPk(req.params.orderId, {
+      include: [Cart],
+    });
+
 // GET /api/orders/:orderID
 router.put("/:orderId", async (req, res, next) => {
   try {
