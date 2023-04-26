@@ -44,47 +44,49 @@ const AuthForm = ({ name, displayName }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input
-            name="username"
-            value={username}
-            type="text"
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input
-            name="password"
-            value={password}
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        {name === "signup" ? (
+      {
+        <form onSubmit={handleSubmit} name={name}>
           <div>
-            <label htmlFor="email">
-              <small>email</small>
+            <label htmlFor="username">
+              <small>Username</small>
             </label>
             <input
-              name="email"
-              value={email}
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
+              name="username"
+              value={username}
+              type="text"
+              onChange={(e) => setUserName(e.target.value)}
             />
           </div>
-        ) : null}
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && <div> {error} </div>}
-      </form>
+          <div>
+            <label htmlFor="password">
+              <small>Password</small>
+            </label>
+            <input
+              name="password"
+              value={password}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          {name === "signup" ? (
+            <div>
+              <label htmlFor="email">
+                <small>email</small>
+              </label>
+              <input
+                name="email"
+                value={email}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          ) : null}
+          <div>
+            <button type="submit">{displayName}</button>
+          </div>
+          {error && <div> {error} </div>}
+        </form>
+      }
     </div>
   );
 };

@@ -42,6 +42,22 @@ export const editQuantityAsync = createAsyncThunk(
     }
   }
 );
+export const handleAdminEditAsync = createAsyncThunk(
+  "coffee/editCoffeeListing",
+  async ({ coffeeId, name, countryOrigin, roast, price }) => {
+    try {
+      const { data } = await axios.put(`/api/coffees/${coffeeId}`, {
+        name,
+        countryOrigin,
+        roast,
+        price,
+      });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 const singleCoffeeSlice = createSlice({
   name: "singleCoffee",
@@ -55,6 +71,10 @@ const singleCoffeeSlice = createSlice({
       state.cart = action.payload;
     });
     builder.addCase(editQuantityAsync.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state = action.payload;
+    });
+    builder.addCase(handleAdminEditAsync.fulfilled, (state, action) => {
       console.log(action.payload);
       state = action.payload;
     });

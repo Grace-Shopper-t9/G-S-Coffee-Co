@@ -6,6 +6,7 @@ import {
   fetchSingleCoffee,
   fetchAddToCart,
   editQuantityAsync,
+  handleAdminEditAsync,
 } from "../features/singleCoffee/singleCoffeeSlice";
 import { fetchUserAsync } from "../features/cart/cartSlice";
 
@@ -14,7 +15,7 @@ const SingleCoffee = () => {
   const dispatch = useDispatch();
   const coffee = useSelector(selectSingleCoffee);
   coffeeId = +coffeeId;
-
+  const admin = useSelector((state) => state.auth.me.isAdmin);
   const loggedInUserID = useSelector((state) => state.auth.me.id);
   const user = useSelector((state) => state.cart.user);
 
@@ -32,7 +33,11 @@ const SingleCoffee = () => {
     dispatch(fetchSingleCoffee(coffeeId));
     loggedInUserID ? dispatch(fetchUserAsync(loggedInUserID)) : null;
   }, [dispatch, coffeeId, loggedInUserID, quantity]);
-  //   console.log("coffee:", coffee);
+
+  const [name, setName] = useState("");
+  const [countryOrigin, setCountryOrigin] = useState("");
+  const [roast, setRoast] = useState("");
+  const [price, setPrice] = useState(0);
 
   const handleAddToCart = () => {
     console.log(coffeeId, orderId);
@@ -43,6 +48,17 @@ const SingleCoffee = () => {
     e.preventDefault();
     dispatch(editQuantityAsync({ coffeeId, quantity }));
     dispatch(fetchSingleCoffee(coffeeId));
+  };
+
+  const handleEditSubmit = () => {
+    dispatch(
+      handleAdminEditAsync({ coffeeId, name, countryOrigin, roast, price })
+    );
+    setName("");
+    setCountryOrigin("");
+    setRoast("");
+    setPrice(Number);
+    dispatch(fetchCoffeesAsync());
   };
 
   return (
@@ -79,6 +95,49 @@ const SingleCoffee = () => {
         </div>
       ) : (
         <div>..loading page</div>
+      )}
+      {admin ? (
+        <form onSubmit={handleEditSubmit}>
+          <h6>
+            Coffee Name
+            <input
+              name="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </h6>
+          <h6>
+            Country-Origin
+            <input
+              name="countryOrigin"
+              type="text"
+              value={countryOrigin}
+              onChange={(e) => setCountryOrigin(e.target.value)}
+            />
+          </h6>
+          <h6>
+            Price
+            <input
+              name="price"
+              type="text"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </h6>
+          <h6>
+            Roast
+            <input
+              name="roast"
+              type="text"
+              value={roast}
+              onChange={(e) => setRoast(e.target.value)}
+            />
+          </h6>
+          <button type="submit">Edit Coffee</button>
+        </form>
+      ) : (
+        <div></div>
       )}
     </div>
   );
