@@ -2,6 +2,7 @@
 
 /* organized by page */
 body {
+  font-family: "Roboto", sans-serif;
   background-color: black;
   color: white;
 }
@@ -67,8 +68,8 @@ video {
   padding-top: 500px;
   font-family: "Roboto", sans-serif;
   color: whitesmoke;
-  font-size: 20px;
-  margin: 0px;
+  font-size: 16px;
+  margin: 10px;
 }
 
 #allcoffees h2 {
@@ -90,7 +91,8 @@ video {
 }
 
 #allcoffees {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: 33% 33% 33%;
   max-width: 100%;
   height: auto;
@@ -113,37 +115,23 @@ form div {
 /* single coffee page */
 
 .single-coffee {
-  display: flex;
-  flex-wrap: wrap;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   color: whitesmoke;
   margin-left: 10px;
 }
 
-.icrementaddbutton {
+.incrementaddbutton {
   color: bisque;
   font-family: "Roboto-mono", monospace;
-  font-size: 10px;
+  font-size: 16px;
   display: inline;
 }
 
 .single-coffee {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 20px;
-}
-
-.coffee-details {
-  width: 50%;
-  margin: 0;
-}
-
-.incrementaddbutton {
-  width: 50%;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .button-container {

@@ -50,6 +50,7 @@ const Cart = () => {
           allUserCoffees.map((coffee) => (
             <li key={coffee.id}>
               <h1>name:{coffee.name}</h1>
+              <img className="coffeephoto" src={coffee.imageUrl}></img>
               <h1>countryOrigin:{coffee.countryOrigin}</h1>
               <h1>price:{coffee.price}</h1>
               <h1>roast:{coffee.roast}</h1>

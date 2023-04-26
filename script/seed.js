@@ -98,38 +98,38 @@ async function seed() {
     })
   );
   // Cart Seeding
-  const carts = [
-    {
-      orderId: "1",
-      coffeeId: "1",
-    },
-    {
-      orderId: "1",
-      coffeeId: "2",
-    },
-    {
-      orderId: "2",
-      coffeeId: "2",
-    },
-    {
-      orderId: "2",
-      coffeeId: "3",
-    },
-    {
-      orderId: "3",
-      coffeeId: "3",
-    },
-    {
-      orderId: "3",
-      coffeeId: "2",
-    },
-  ];
+  // const carts = [
+  //   {
+  //     orderId: "1",
+  //     coffeeId: "1",
+  //   },
+  //   {
+  //     orderId: "1",
+  //     coffeeId: "2",
+  //   },
+  //   {
+  //     orderId: "2",
+  //     coffeeId: "2",
+  //   },
+  //   {
+  //     orderId: "2",
+  //     coffeeId: "3",
+  //   },
+  //   {
+  //     orderId: "3",
+  //     coffeeId: "3",
+  //   },
+  //   {
+  //     orderId: "3",
+  //     coffeeId: "2",
+  //   },
+  // ];
 
-  const [cart1, cart2, cart3] = await Promise.all(
-    carts.map((e) => {
-      return Cart.create(e);
-    })
-  );
+  // const [cart1, cart2, cart3] = await Promise.all(
+  //   carts.map((e) => {
+  //     return Cart.create(e);
+  //   })
+  // );
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);

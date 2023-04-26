@@ -5,6 +5,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = [];
 
+const TOKEN = "token";
+
 export const handleAdminDeleteAsync = createAsyncThunk(
   "coffee/delete",
   async (coffeeId) => {
@@ -25,6 +27,29 @@ export const handleAdminAddAsync = createAsyncThunk(
     return data;
   }
 );
+
+//we are not getting our req.headers.authorization
+//passed into our requireToken for the api/users route
+//so we decided to create a frontend component that could
+//request all users as an admin only, and allow us to send
+//req.headers.authorization to our middleware in gateKeeping.js which would all us to block anyone who is not an admin from viewing api/users
+export const fetchAllUsersAsync = createAsyncThunk("All user", async () => {
+  const token = window.localStorage.getItem(TOKEN);
+  console.log(token);
+  try {
+    if (token) {
+      const res = await axios.get("/api/users", {
+        headers: {
+          authorization: token,
+        },
+      });
+      return res.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export const adminSlice = createSlice({
   name: "admin",
   initialState,

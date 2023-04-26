@@ -32,7 +32,7 @@ const SingleCoffee = () => {
     console.log("fetching coffee data...");
     dispatch(fetchSingleCoffee(coffeeId));
     loggedInUserID ? dispatch(fetchUserAsync(loggedInUserID)) : null;
-  }, [dispatch, coffeeId, loggedInUserID, quantity]);
+  }, [dispatch, coffeeId, loggedInUserID, quantity, orderId]);
 
   const [name, setName] = useState("");
   const [countryOrigin, setCountryOrigin] = useState("");
@@ -40,7 +40,6 @@ const SingleCoffee = () => {
   const [price, setPrice] = useState(0);
 
   const handleAddToCart = () => {
-    console.log(coffeeId, orderId);
     dispatch(fetchAddToCart({ coffeeId, orderId }));
   };
 
