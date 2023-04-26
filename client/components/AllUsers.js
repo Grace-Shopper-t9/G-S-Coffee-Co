@@ -10,7 +10,6 @@ import { fetchAllUsersAsync } from "../features/admin/Adminslice";
 //req.headers.authorization to our middleware in gateKeeping.js which would all us to block anyone who is not an admin from viewing api/users
 
 const AllUsers = () => {
-  const coffees = useSelector(selectCoffees);
   const dispatch = useDispatch();
   const admin = useSelector((state) => state.auth.me.isAdmin);
 

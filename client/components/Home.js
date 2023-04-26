@@ -10,6 +10,7 @@ import {
   handleAdminAddAsync,
   handleAdminDeleteAsync,
 } from "../features/admin/Adminslice";
+import AllUsers from "./AllUsers";
 
 const Home = () => {
   const coffees = useSelector(selectCoffees);
@@ -121,6 +122,7 @@ const Home = () => {
           <div></div>
         )}
       </div>
+      <AllUsers />
     </div>
   );
 };

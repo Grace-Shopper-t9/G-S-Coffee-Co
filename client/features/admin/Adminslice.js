@@ -35,7 +35,7 @@ export const handleAdminAddAsync = createAsyncThunk(
 //req.headers.authorization to our middleware in gateKeeping.js which would all us to block anyone who is not an admin from viewing api/users
 export const fetchAllUsersAsync = createAsyncThunk("All user", async () => {
   const token = window.localStorage.getItem(TOKEN);
-  console.log(token);
+
   try {
     if (token) {
       const res = await axios.get("/api/users", {
