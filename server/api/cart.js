@@ -8,8 +8,8 @@ module.exports = router;
 router.get("/", async (req, res, next) => {
   try {
     const cart = await Cart.findAll({
-      attributes: ["id", "orderId", "coffeeId"],
-      include: [Orders, Coffee],
+      attributes: ["orderId", "coffeeId"],
+      include: [Coffee],
     });
     res.json(cart);
   } catch (err) {
@@ -19,8 +19,8 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const cart = await Cart.findByPk(req.params.id, {
-      attributes: ["id", "orderId", "coffeeId"],
-      include: [Orders, Coffee],
+      attributes: ["orderId", "coffeeId"],
+      include: [Coffee],
     });
     res.json(cart);
   } catch (err) {

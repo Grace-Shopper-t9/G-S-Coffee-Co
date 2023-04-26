@@ -10,11 +10,14 @@ const Orders = require("./models/Orders");
 User.hasOne(Orders);
 Orders.belongsTo(User);
 
-Orders.hasOne(Cart);
-Cart.belongsTo(Orders);
+// Orders.hasOne(Cart);
+// Cart.belongsTo(Orders);
 
-Cart.hasMany(Coffee);
-Coffee.belongsTo(Cart);
+// Cart.hasMany(Coffee);
+// Coffee.belongsTo(Cart);
+
+Orders.belongsToMany(Coffee, { through: Cart });
+Coffee.belongsToMany(Orders, { through: Cart });
 
 module.exports = {
   db,

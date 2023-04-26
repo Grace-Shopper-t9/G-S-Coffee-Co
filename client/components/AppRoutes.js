@@ -35,6 +35,10 @@ const AppRoutes = () => {
           <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/VerPurchase" element={<VerPurchase />} />
+          <Route
+            path="/login"
+            element={<AuthForm name="login" displayName="Login" />}
+          />
         </Routes>
       ) : (
         <Routes>

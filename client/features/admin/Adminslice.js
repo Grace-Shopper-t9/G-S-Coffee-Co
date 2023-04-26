@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { axios } from "axios";
+import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const handleadmindelete = createAsyncThunk(

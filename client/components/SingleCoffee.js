@@ -13,7 +13,6 @@ const SingleCoffee = () => {
   const coffee = useSelector(selectSingleCoffee);
   const id = coffee.id;
 
-
   const user = useSelector((state) => state.cart.user);
 
   const orderState = user ? useSelector((state) => state.cart.order) : null;
@@ -40,14 +39,10 @@ const SingleCoffee = () => {
     dispatch(fetchAddToCart({ id, cartId }));
   };
 
-  // const handleIncrement = (coffee.id) => {
-  //   updateCart(coffee => coffee.map(item => coffee.id === item.id ? coffee.qty += value : coffee)
-
   return (
     <div>
       {coffee ? (
         <div className="single-coffee">
-
           <div className="coffee-details">
             <p>lets get you fueled up!</p>
             <div key={coffee.id}>
@@ -57,12 +52,6 @@ const SingleCoffee = () => {
               <h5>{coffee.description} </h5>
               <h5>{coffee.roast} roast</h5>
             </div>
-          <div key={coffee.id}>
-            <h3>{coffee.name}</h3>
-            <h5>{coffee.description} </h5>
-            <h4>$ {coffee.price}</h4>
-            <h4>{coffee.countryOrigin}</h4>
-            <h5>{coffee.roast}</h5>
           </div>
           <div className="incrementaddbutton">
             <div className="coffee-details">
