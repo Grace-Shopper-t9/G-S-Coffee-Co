@@ -66,19 +66,18 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/", async (req, res, next) => {
+  console.log("req.body:   ", req.body);
   try {
-    const cart = await Cart.findByPk(req.params.id);
+    const { ORDERID, COFFEEID } = req.body;
+    const cart = await Cart.findOne({
+      where: {
+        orderId: ORDERID,
+        coffeeId: COFFEEID,
+      },
+    });
     await cart.destroy();
     res.send(cart);
-  } catch (error) {
-    next(error);
-  }
-});
-router.put("/:id", async (req, res, next) => {
-  try {
-    const cart = await Cart.findByPk(req.params.id);
-    res.send(await cart.update(req.body));
   } catch (error) {
     next(error);
   }

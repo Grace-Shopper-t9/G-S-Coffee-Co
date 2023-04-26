@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  fetchOneCartAsync,
   fetchOneOrderAsync,
   fetchUserAsync,
   editOrderStatusAsync,
@@ -13,17 +12,13 @@ import {
 const Cart = () => {
   const loggedInUserID = useSelector((state) => state.auth.me.id);
   const username = useSelector((state) => state.auth.me.username);
+  const user = useSelector((state) => state.cart.user);
+  const userOrder = user ? useSelector((state) => state.cart.order) : null;
+  const allUserCoffees = userOrder.coffees;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.cart.user);
-
-  const userOrder = user ? useSelector((state) => state.cart.order) : null;
-  // console.log(userOrder);
-  const allUserCoffees = userOrder.coffees;
-
-  // console.log(allUserCoffees);
   //order from state
   const { order } = user;
   let orderId = null;
@@ -41,9 +36,9 @@ const Cart = () => {
     dispatch(editOrderStatusAsync({ orderId, fulfilled }));
     navigate("/VerPurchase");
   };
-  const handleRemoveItem = (coffeeId) => {
-    const cartId = null;
-    dispatch(removeItemFromCartAsync({ coffeeId }));
+  const handleRemoveItem = (orderId, coffeeId) => {
+    console.log(coffeeId, orderId);
+    dispatch(removeItemFromCartAsync({ orderId, coffeeId }));
   };
 
   return (
@@ -59,7 +54,7 @@ const Cart = () => {
               <h1>roast:{coffee.roast}</h1>
               <h1>quantity:{coffee.quantity}</h1>
               <h1>total: ${coffee.price * coffee.quantity}</h1>
-              <button onClick={() => handleRemoveItem(coffee.id)}>
+              <button onClick={() => handleRemoveItem(orderId, coffee.id)}>
                 remove from cart
               </button>
             </li>

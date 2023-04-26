@@ -25,7 +25,8 @@ const Coffee = db.define("coffee", {
   imageUrl: {
     type: Sequelize.TEXT,
     allowNull: true,
-    defaultValue: null,
+    defaultValue:
+      "https://live.staticflickr.com/65535/52844552649_9514ff0686.jpg",
   },
   quantity: {
     type: Sequelize.INTEGER,

@@ -17,16 +17,15 @@ const SingleCoffee = () => {
 
   const loggedInUserID = useSelector((state) => state.auth.me.id);
   const user = useSelector((state) => state.cart.user);
-  // console.log(user);
+
   const userOrder = user ? useSelector((state) => state.cart.order) : null;
 
   //order from state
   const { order } = user;
   let orderId = null;
   order ? (orderId = order.id) : null;
-  const [quantity, setQuantity] = useState(0);
 
-  // console.log(coffeeId, orderId);
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     console.log("fetching coffee data...");

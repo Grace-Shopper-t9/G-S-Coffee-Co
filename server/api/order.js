@@ -17,19 +17,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// GET /api/coffee/:orderID
-// router.get("/:orderId", async (req, res, next) => {
-//   try {
-//     const singleOrder = await Orders.findByPk(req.params.orderId, {
-//       include: [Coffee],
-//     });
-//     console.log(singleOrder);
-//     res.send(singleOrder);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 // GET /api/orders/:orderID
 router.get("/:orderId", async (req, res, next) => {
   const user = await User.findByToken(req.headers.authorization);

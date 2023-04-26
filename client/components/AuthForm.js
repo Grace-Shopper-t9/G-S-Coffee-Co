@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authenticate } from "./store";
 
-import { addOneOrderAsync } from "../features/cart/cartSlice";
-
 /**
   The AuthForm component can be used for Login or Sign Up.
   Props for Login: name="login", displayName="Login"
@@ -14,10 +12,11 @@ import { addOneOrderAsync } from "../features/cart/cartSlice";
 const AuthForm = ({ name, displayName }) => {
   const loggedInUserID = useSelector((state) => state.auth.me.id);
   const user = useSelector((state) => state.cart.user);
-
-  const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");

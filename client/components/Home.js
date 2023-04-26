@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {
@@ -8,19 +7,38 @@ import {
   fetchCoffeesAsync,
 } from "../features/allCoffees/coffeeSlice";
 import {
-  handleadminadd,
-  handleadmindelete,
+  handleAdminAddAsync,
+  handleAdminDeleteAsync,
 } from "../features/admin/Adminslice";
 
 const Home = () => {
   const coffees = useSelector(selectCoffees);
   const dispatch = useDispatch();
   const username = useSelector((state) => state.auth.me.username);
-  const admin = useSelector((state) => state.auth.me.admin);
+  const admin = useSelector((state) => state.auth.me.isAdmin);
+
+  const [name, setName] = useState("");
+  const [countryOrigin, setCountryOrigin] = useState("");
+  const [roast, setRoast] = useState("");
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCoffeesAsync());
   }, [dispatch]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(handleAdminAddAsync({ name, countryOrigin, roast, price }));
+    setName("");
+    setCountryOrigin("");
+    setRoast("");
+    setPrice(Number);
+    dispatch(fetchCoffeesAsync());
+  };
+  const handleDelete = async (coffeeId) => {
+    dispatch(handleAdminDeleteAsync(coffeeId));
+    dispatch(fetchCoffeesAsync());
+  };
 
   return (
     <div>
@@ -46,48 +64,62 @@ const Home = () => {
                   </NavLink>
                 </div>
                 <h4>${coffee.price}</h4>
-                {/* {admin ? (
-                  <button onClick={() => handleadmindelete()}>
+                {admin ? (
+                  <button onClick={() => handleDelete(coffee.id)}>
                     Delete Posting
                   </button>
                 ) : (
                   <hr />
-                )} */}
+                )}
               </div>
             ))
           ) : (
             <div>loading page...</div>
           )}
         </div>
-        {/* {admin ? (
-          <form>
+        {admin ? (
+          <form onSubmit={handleSubmit}>
             <h6>
               Coffee Name
-              <input name="Coffee Name" type="text" />
+              <input
+                name="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </h6>
             <h6>
               Country-Origin
-              <input name="country origin" type="text" />
+              <input
+                name="countryOrigin"
+                type="text"
+                value={countryOrigin}
+                onChange={(e) => setCountryOrigin(e.target.value)}
+              />
             </h6>
             <h6>
               Price
-              <input name="Price" type="text" />
+              <input
+                name="price"
+                type="text"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
             </h6>
             <h6>
               Roast
-              <input name="Roast" type="text" />
+              <input
+                name="roast"
+                type="text"
+                value={roast}
+                onChange={(e) => setRoast(e.target.value)}
+              />
             </h6>
-            <h6>
-              Stock
-              <input name="Stock" type="text" />
-            </h6>
-            <button onClick={() => handleadminadd(console.log("hello"))}>
-              Add Coffee
-            </button>
+            <button type="submit">Add Coffee</button>
           </form>
         ) : (
           <div></div>
-        )} */}
+        )}
       </div>
     </div>
   );
