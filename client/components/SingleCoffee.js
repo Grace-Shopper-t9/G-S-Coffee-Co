@@ -1,42 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSingleCoffee,
   fetchSingleCoffee,
   fetchAddToCart,
+  editQuantityAsync,
 } from "../features/singleCoffee/singleCoffeeSlice";
+import { fetchUserAsync } from "../features/cart/cartSlice";
 
 const SingleCoffee = () => {
-  const { coffeeId } = useParams();
+  let { coffeeId } = useParams();
   const dispatch = useDispatch();
   const coffee = useSelector(selectSingleCoffee);
-  const id = coffee.id;
+  coffeeId = +coffeeId;
 
+  const loggedInUserID = useSelector((state) => state.auth.me.id);
   const user = useSelector((state) => state.cart.user);
-
-  const orderState = user ? useSelector((state) => state.cart.order) : null;
-  const userCartItems = orderState
-    ? useSelector((state) => state.cart.coffee)
-    : null;
+  // console.log(user);
+  const userOrder = user ? useSelector((state) => state.cart.order) : null;
 
   //order from state
   const { order } = user;
   let orderId = null;
   order ? (orderId = order.id) : null;
-  //cart from state
-  const { cart } = orderState;
-  let cartId = null;
-  cart ? (cartId = cart.id) : null;
+  const [quantity, setQuantity] = useState(0);
+
+  // console.log(coffeeId, orderId);
 
   useEffect(() => {
     console.log("fetching coffee data...");
     dispatch(fetchSingleCoffee(coffeeId));
-  }, [dispatch, coffeeId]);
+    loggedInUserID ? dispatch(fetchUserAsync(loggedInUserID)) : null;
+  }, [dispatch, coffeeId, loggedInUserID, quantity]);
   //   console.log("coffee:", coffee);
 
   const handleAddToCart = () => {
-    dispatch(fetchAddToCart({ id, cartId }));
+    console.log(coffeeId, orderId);
+    dispatch(fetchAddToCart({ coffeeId, orderId }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editQuantityAsync({ coffeeId, quantity }));
+    dispatch(fetchSingleCoffee(coffeeId));
   };
 
   return (
@@ -51,22 +58,24 @@ const SingleCoffee = () => {
               <h2>{coffee.name}</h2>
               <h5>{coffee.description} </h5>
               <h5>{coffee.roast} roast</h5>
+              <h5>Purchase quantity:{coffee.quantity}</h5>
             </div>
           </div>
           <div className="incrementaddbutton">
             <div className="coffee-details">
               {<button onClick={handleAddToCart}>add to cart</button>}
-              <div>
-                <button onClick={() => props.handleDecrement(coffee.id, +1)}>
-                  -
-                </button>
-                {coffee.qty}
-                <span>{coffee.qty === 1 ? coffee.qty : coffee.qty}</span>
-                <button onClick={() => props.handleIncrement(coffee.id, -1)}>
-                  +
-                </button>
-              </div>
             </div>
+            quantity:
+            <form onSubmit={handleSubmit}>
+              <input
+                key={coffee.id}
+                name="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              ></input>{" "}
+              <button type="submit">Add</button>
+            </form>
+            <hr />
           </div>
         </div>
       ) : (

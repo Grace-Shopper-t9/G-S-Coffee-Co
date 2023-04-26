@@ -50,6 +50,7 @@ export const editOrderStatusAsync = createAsyncThunk(
     }
   }
 );
+
 // export const removeItemFromCartAsync = createAsyncThunk(
 //   "coffees/editCartContents",
 //   async ({ coffeeId, cartId }) => {
@@ -83,6 +84,7 @@ export const cartSlice = createSlice({
     //   state.coffee = action.payload.coffees;
     // });
     builder.addCase(fetchOneOrderAsync.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.order = action.payload;
     });
     builder.addCase(fetchUserAsync.fulfilled, (state, action) => {

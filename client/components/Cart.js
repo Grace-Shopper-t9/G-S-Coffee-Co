@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -20,9 +20,10 @@ const Cart = () => {
   const user = useSelector((state) => state.cart.user);
 
   const userOrder = user ? useSelector((state) => state.cart.order) : null;
-  console.log(userOrder);
+  // console.log(userOrder);
   const allUserCoffees = userOrder.coffees;
 
+  // console.log(allUserCoffees);
   //order from state
   const { order } = user;
   let orderId = null;
@@ -36,19 +37,20 @@ const Cart = () => {
 
   const handleCheckout = (orderId) => {
     const fulfilled = true;
+
     dispatch(editOrderStatusAsync({ orderId, fulfilled }));
     navigate("/VerPurchase");
   };
-  // const handleRemoveItem = (coffeeId) => {
-  //   const cartId = null;
-  //   dispatch(removeItemFromCartAsync({ coffeeId, cartId }));
-  // };
+  const handleRemoveItem = (coffeeId) => {
+    const cartId = null;
+    dispatch(removeItemFromCartAsync({ coffeeId }));
+  };
 
   return (
     <div>
       <h1>{username}'s Cart</h1>
       <ul>
-        {allUserCoffees !== null && userOrder.fulfilled === "false" ? (
+        {allUserCoffees && userOrder.fulfilled === "false" ? (
           allUserCoffees.map((coffee) => (
             <li key={coffee.id}>
               <h1>name:{coffee.name}</h1>
@@ -66,7 +68,7 @@ const Cart = () => {
           <h1>Add Coffee to your Cart</h1>
         )}
       </ul>
-      {allUserCoffees !== null && userOrder.fulfilled === "false" ? (
+      {allUserCoffees && userOrder.fulfilled === "false" ? (
         <button onClick={() => handleCheckout(orderId)}>checkout</button>
       ) : (
         <div></div>

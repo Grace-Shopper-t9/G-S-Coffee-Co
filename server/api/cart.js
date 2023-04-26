@@ -9,24 +9,50 @@ router.get("/", async (req, res, next) => {
   try {
     const cart = await Cart.findAll({
       attributes: ["orderId", "coffeeId"],
-      include: [Coffee],
     });
     res.json(cart);
   } catch (err) {
     next(err);
   }
 });
-router.get("/:id", async (req, res, next) => {
+// router.get("/:id", async (req, res, next) => {
+//   try {
+//     const cart = await Cart.findByPk(req.params.id, {
+//       attributes: ["orderId", "coffeeId"],
+//     });
+//     res.json(cart);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+router.post("/", async (req, res, next) => {
+  console.log("req.body:   ", req.body);
   try {
-    const cart = await Cart.findByPk(req.params.id, {
-      attributes: ["orderId", "coffeeId"],
-      include: [Coffee],
-    });
-    res.json(cart);
-  } catch (err) {
-    next(err);
+    res.status(201).send(await Cart.create(req.body));
+  } catch (error) {
+    next(error);
   }
 });
+
+// router.post("/", async (req, res, next) => {
+//   // const user = await User.findByToken(req.headers.authorization);
+//   console.log("req.body:   ", req.body);
+//   const { ORDERID, COFFEEID } = req.body;
+//   try {
+//     const [cart, created] = await Cart.create({
+//       where: {
+//         orderId: ORDERID,
+//       },
+//       defaults: { coffeeId: COFFEEID },
+//     });
+//     if (created) {
+//       console.log("new order create", created);
+//     }
+//     res.json(cart);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 router.post("/", async (req, res, next) => {
   try {

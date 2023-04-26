@@ -37,9 +37,8 @@ router.get("/:coffeeId", async (req, res, next) => {
 });
 router.put("/:coffeeid", async (req, res, next) => {
   try {
-    const singleCoffee = await Coffee.findByPk(req.params.coffeeid, {
-      include: [Cart],
-    });
+    console.log("req.body : ", req.body);
+    const singleCoffee = await Coffee.findByPk(req.params.coffeeid);
     res.send(await singleCoffee.update(req.body));
   } catch (error) {
     next(error);
@@ -63,16 +62,16 @@ router.post("/:coffeeId", async (req, res, next) => {
   }
 });
 
-router.put("/:coffeeid", async (req, res, next) => {
-  try {
-    const singleCoffee = await Coffee.findByPk(req.params.coffeeid, {
-      include: [Cart],
-    });
-    res.send(await singleCoffee.update(req.body));
-  } catch (error) {
-    next(error);
-  }
-});
+// router.put("/:coffeeid", async (req, res, next) => {
+//   try {
+//     const singleCoffee = await Coffee.findByPk(req.params.coffeeid, {
+//       include: [Cart],
+//     });
+//     res.send(await singleCoffee.update(req.body));
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 // router.put("/cart", async (req, res, next) => {
 //   try {

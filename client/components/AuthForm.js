@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authenticate } from "./store";
 
-import { addOrderToNewUserAsync } from "../features/cart/cartSlice";
+import { addOneOrderAsync } from "../features/cart/cartSlice";
 
 /**
   The AuthForm component can be used for Login or Sign Up.
@@ -12,26 +12,36 @@ import { addOrderToNewUserAsync } from "../features/cart/cartSlice";
 **/
 
 const AuthForm = ({ name, displayName }) => {
+  const loggedInUserID = useSelector((state) => state.auth.me.id);
+  const user = useSelector((state) => state.cart.user);
+
   const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [formName, setFormName] = useState("");
 
-  const [userId, setUserId] = useState(0);
+  const { order } = user;
+  let orderId = null;
+  order ? (orderId = order.id) : null;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
     dispatch(authenticate({ username, password, email, method: formName }));
-    // formName === "signup" ? dispatch(addOrderToNewUserAsync(userId)) : null;
     setUserName("");
     setPassword("");
     setEmail("");
+    setFormName(formName);
     navigate("/");
-    userId++;
   };
+
+  useEffect(() => {
+    loggedInUserID ? dispatch(fetchUserAsync(loggedInUserID)) : null;
+    formName === "signup" ? dispatch(fetchOneOrderAsync(orderId)) : null;
+  }, [formName]);
 
   return (
     <div>
