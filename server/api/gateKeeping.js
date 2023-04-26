@@ -1,13 +1,12 @@
-const { isRejectedWithValue } = require("@reduxjs/toolkit");
 const User = require("../db/models/User");
 
 const requireToken = async (req, res, next) => {
-  console.log(req.headers);
+  console.log("sdhflkhsdlfksjd", req.headers.authorization);
   try {
-    const token = req.header;
+    const token = req.headers.authorization;
     console.log(token);
     const user = await User.findByToken(token);
-    // console.log(user);
+    console.log(user);
     req.user = user;
     next();
   } catch (error) {

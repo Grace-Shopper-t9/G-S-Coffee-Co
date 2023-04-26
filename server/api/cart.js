@@ -54,22 +54,22 @@ router.post("/", async (req, res, next) => {
 //   }
 // });
 
-router.post("/", async (req, res, next) => {
-  try {
-    res.status(201).send(
-      await Cart.create(req.body, {
-        include: [User, Coffee],
-      })
-    );
-  } catch (error) {
-    next(error);
-  }
-});
+// router.post("/", async (req, res, next) => {
+//   try {
+//     res.status(201).send(
+//       await Cart.create(req.body, {
+//         include: [User, Coffee],
+//       })
+//     );
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
-router.delete("/", async (req, res, next) => {
-  console.log("req.body:   ", req.body);
+router.put("/", async (req, res, next) => {
   try {
     const { ORDERID, COFFEEID } = req.body;
+
     const cart = await Cart.findOne({
       where: {
         orderId: ORDERID,

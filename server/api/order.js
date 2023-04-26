@@ -20,7 +20,6 @@ router.get("/", async (req, res, next) => {
 // GET /api/orders/:orderID
 router.get("/:orderId", async (req, res, next) => {
   const user = await User.findByToken(req.headers.authorization);
-  console.log("req.headers.authorization:   ", req.headers.authorization);
   try {
     const [singleOrder, created] = await Orders.findOrCreate({
       where: {

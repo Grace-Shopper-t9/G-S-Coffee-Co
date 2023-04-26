@@ -43,7 +43,7 @@ export const removeItemFromCartAsync = createAsyncThunk(
   async ({ orderId, coffeeId }) => {
     console.log("apI update request:", coffeeId, orderId);
     try {
-      const { data } = await axios.delete(`/api/carts`, {
+      const { data } = await axios.put(`/api/carts`, {
         COFFEEID: coffeeId,
         ORDERID: orderId,
       });
@@ -71,7 +71,7 @@ export const cartSlice = createSlice({
     });
     builder.addCase(removeItemFromCartAsync.fulfilled, (state, action) => {
       console.log(action.payload);
-      console.log(state.order.coffee);
+      // console.log(state.order.coffee);
       const newState = state.order.coffee.filter(
         (coffee) => coffee.id !== action.payload.id
       );

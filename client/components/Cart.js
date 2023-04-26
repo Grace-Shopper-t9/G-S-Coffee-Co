@@ -39,6 +39,7 @@ const Cart = () => {
   const handleRemoveItem = (orderId, coffeeId) => {
     console.log(coffeeId, orderId);
     dispatch(removeItemFromCartAsync({ orderId, coffeeId }));
+    dispatch(fetchOneOrderAsync(orderId));
   };
 
   return (
