@@ -1,53 +1,70 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectSingleCoffee,
   fetchSingleCoffee,
   fetchAddToCart,
+  editQuantityAsync,
+  handleAdminEditAsync,
 } from "../features/singleCoffee/singleCoffeeSlice";
+import { fetchUserAsync } from "../features/cart/cartSlice";
 
 const SingleCoffee = () => {
-  const { coffeeId } = useParams();
+  let { coffeeId } = useParams();
   const dispatch = useDispatch();
   const coffee = useSelector(selectSingleCoffee);
-  const id = coffee.id;
-
-
+  coffeeId = +coffeeId;
+  const admin = useSelector((state) => state.auth.me.isAdmin);
+  const loggedInUserID = useSelector((state) => state.auth.me.id);
   const user = useSelector((state) => state.cart.user);
 
-  const orderState = user ? useSelector((state) => state.cart.order) : null;
-  const userCartItems = orderState
-    ? useSelector((state) => state.cart.coffee)
-    : null;
+  const userOrder = user ? useSelector((state) => state.cart.order) : null;
 
   //order from state
   const { order } = user;
   let orderId = null;
   order ? (orderId = order.id) : null;
-  //cart from state
-  const { cart } = orderState;
-  let cartId = null;
-  cart ? (cartId = cart.id) : null;
+
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     console.log("fetching coffee data...");
     dispatch(fetchSingleCoffee(coffeeId));
-  }, [dispatch, coffeeId]);
-  //   console.log("coffee:", coffee);
+    loggedInUserID ? dispatch(fetchUserAsync(loggedInUserID)) : null;
+  }, [dispatch, coffeeId, loggedInUserID, quantity]);
+
+  const [name, setName] = useState("");
+  const [countryOrigin, setCountryOrigin] = useState("");
+  const [roast, setRoast] = useState("");
+  const [price, setPrice] = useState(0);
 
   const handleAddToCart = () => {
-    dispatch(fetchAddToCart({ id, cartId }));
+    console.log(coffeeId, orderId);
+    dispatch(fetchAddToCart({ coffeeId, orderId }));
   };
 
-  // const handleIncrement = (coffee.id) => {
-  //   updateCart(coffee => coffee.map(item => coffee.id === item.id ? coffee.qty += value : coffee)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editQuantityAsync({ coffeeId, quantity }));
+    dispatch(fetchSingleCoffee(coffeeId));
+  };
+
+  const handleEditSubmit = () => {
+    dispatch(
+      handleAdminEditAsync({ coffeeId, name, countryOrigin, roast, price })
+    );
+    setName("");
+    setCountryOrigin("");
+    setRoast("");
+    setPrice(Number);
+    dispatch(fetchCoffeesAsync());
+  };
 
   return (
     <div>
       {coffee ? (
         <div className="single-coffee">
-
           <div className="coffee-details">
             <p>lets get you fueled up!</p>
             <div key={coffee.id}>
@@ -56,32 +73,71 @@ const SingleCoffee = () => {
               <h2>{coffee.name}</h2>
               <h5>{coffee.description} </h5>
               <h5>{coffee.roast} roast</h5>
+              <h5>Purchase quantity:{coffee.quantity}</h5>
             </div>
-          <div key={coffee.id}>
-            <h3>{coffee.name}</h3>
-            <h5>{coffee.description} </h5>
-            <h4>$ {coffee.price}</h4>
-            <h4>{coffee.countryOrigin}</h4>
-            <h5>{coffee.roast}</h5>
           </div>
           <div className="incrementaddbutton">
             <div className="coffee-details">
               {<button onClick={handleAddToCart}>add to cart</button>}
-              <div>
-                <button onClick={() => props.handleDecrement(coffee.id, +1)}>
-                  -
-                </button>
-                {coffee.qty}
-                <span>{coffee.qty === 1 ? coffee.qty : coffee.qty}</span>
-                <button onClick={() => props.handleIncrement(coffee.id, -1)}>
-                  +
-                </button>
-              </div>
             </div>
+            quantity:
+            <form onSubmit={handleSubmit}>
+              <input
+                key={coffee.id}
+                name="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              ></input>{" "}
+              <button type="submit">Add</button>
+            </form>
+            <hr />
           </div>
         </div>
       ) : (
         <div>..loading page</div>
+      )}
+      {admin ? (
+        <form onSubmit={handleEditSubmit}>
+          <h6>
+            Coffee Name
+            <input
+              name="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </h6>
+          <h6>
+            Country-Origin
+            <input
+              name="countryOrigin"
+              type="text"
+              value={countryOrigin}
+              onChange={(e) => setCountryOrigin(e.target.value)}
+            />
+          </h6>
+          <h6>
+            Price
+            <input
+              name="price"
+              type="text"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </h6>
+          <h6>
+            Roast
+            <input
+              name="roast"
+              type="text"
+              value={roast}
+              onChange={(e) => setRoast(e.target.value)}
+            />
+          </h6>
+          <button type="submit">Edit Coffee</button>
+        </form>
+      ) : (
+        <div></div>
       )}
     </div>
   );

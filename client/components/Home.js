@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {
@@ -8,24 +7,41 @@ import {
   fetchCoffeesAsync,
 } from "../features/allCoffees/coffeeSlice";
 import {
-  handleadminadd,
-  handleadmindelete,
+  handleAdminAddAsync,
+  handleAdminDeleteAsync,
 } from "../features/admin/Adminslice";
 
 const Home = () => {
   const coffees = useSelector(selectCoffees);
   const dispatch = useDispatch();
-  console.log(coffees);
   const username = useSelector((state) => state.auth.me.username);
-  const admin = useSelector((state) => state.auth.me.admin);
+  const admin = useSelector((state) => state.auth.me.isAdmin);
+
+  const [name, setName] = useState("");
+  const [countryOrigin, setCountryOrigin] = useState("");
+  const [roast, setRoast] = useState("");
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     dispatch(fetchCoffeesAsync());
   }, [dispatch]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(handleAdminAddAsync({ name, countryOrigin, roast, price }));
+    setName("");
+    setCountryOrigin("");
+    setRoast("");
+    setPrice(Number);
+    dispatch(fetchCoffeesAsync());
+  };
+  const handleDelete = async (coffeeId) => {
+    dispatch(handleAdminDeleteAsync(coffeeId));
+    dispatch(fetchCoffeesAsync());
+  };
+
   return (
     <div>
-
       <div id="allcoffeespage">
         <div id="welcomediv">
           {username ? (
@@ -40,14 +56,6 @@ const Home = () => {
         <div id="allcoffees">
           {coffees && coffees.length ? (
             coffees.map((coffee) => (
-      <div className="container">
-        <video src="/reactcoffeeroaster.mp4" autoPlay muted loop></video>
-      </div>
-      <div id="allcoffees" className="coffeeColumn">
-        {username ? <h3>Welcome, {username}</h3> : <h3>Welcome, Guest</h3>}
-        {coffees && coffees.length ? (
-          coffees.map((coffee) => (
-            <div key={coffee.id} className="renderingwrap">
               <div className="allcoffees" key={coffee.id}>
                 <div className="coffeeclickurl">
                   <NavLink to={`/coffees/${coffee.id}`}>
@@ -55,62 +63,64 @@ const Home = () => {
                     <h3>{coffee.name}</h3>
                   </NavLink>
                 </div>
-
-                <h4>{coffee.price}</h4>
-                <h4>{coffee.roast}</h4>
-                <h4>{coffee.countryOrigin}</h4>
-                <h4>{coffee.description}</h4>
-                <img
-                  className="coffee-img"
-                  src={coffee.imageUrl}
-                  alt={coffee.name}
-                ></img>
+                <h4>${coffee.price}</h4>
                 {admin ? (
-                  <button onClick={() => handleadmindelete()}>
+                  <button onClick={() => handleDelete(coffee.id)}>
                     Delete Posting
                   </button>
                 ) : (
                   <hr />
                 )}
-
-                <h4>${coffee.price}</h4>
-
               </div>
             ))
           ) : (
             <div>loading page...</div>
           )}
         </div>
+        {admin ? (
+          <form onSubmit={handleSubmit}>
+            <h6>
+              Coffee Name
+              <input
+                name="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </h6>
+            <h6>
+              Country-Origin
+              <input
+                name="countryOrigin"
+                type="text"
+                value={countryOrigin}
+                onChange={(e) => setCountryOrigin(e.target.value)}
+              />
+            </h6>
+            <h6>
+              Price
+              <input
+                name="price"
+                type="text"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </h6>
+            <h6>
+              Roast
+              <input
+                name="roast"
+                type="text"
+                value={roast}
+                onChange={(e) => setRoast(e.target.value)}
+              />
+            </h6>
+            <button type="submit">Add Coffee</button>
+          </form>
+        ) : (
+          <div></div>
+        )}
       </div>
-      {admin ? (
-        <form>
-          <h6>
-            Coffee Name
-            <input name="Coffee Name" type="text" />
-          </h6>
-          <h6>
-            Country-Origin
-            <input name="country origin" type="text" />
-          </h6>
-          <h6>
-            Price
-            <input name="Price" type="text" />
-          </h6>
-          <h6>
-            Roast
-            <input name="Roast" type="text" />
-          </h6>
-          <h6>
-            Stock
-            <input name="Stock" type="text" />
-          </h6>
-          <button onClick={() => handleadminadd(console.log("hello"))}>
-            Add Coffee
-          </button>
-        </form>
-      ) : (
-        <div></div>
-      )}
     </div>
   );
 };

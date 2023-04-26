@@ -6,42 +6,58 @@ const initialState = { coffee: [], cart: [] };
 export const fetchSingleCoffee = createAsyncThunk(
   "/coffees/singlecoffee",
   async (id) => {
-    console.log(id);
     try {
       const { data } = await axios.get(`/api/coffees/${id}`);
-      console.log(data);
       return data;
     } catch (err) {
       console.log(err);
     }
   }
 );
-
-
-// export const fetchAddCoffee = createAsyncThunk("Add Coffees", async () => {
-//   async ()= {}
 
 export const fetchAddToCart = createAsyncThunk(
   "add to cart",
-  async ({ id, cartId }) => {
+  async ({ coffeeId, orderId }) => {
     try {
-      const { data } = await axios.post(`/api/coffees/${id}`, { cartId });
+      const { data } = await axios.post(`/api/carts`, {
+        coffeeId,
+        orderId,
+      });
       return data;
     } catch (err) {
       console.log(err);
     }
   }
 );
-
-// export const fetchIncrement = createAsyncThunk("AddToCart", async () => {
-
-//   try {
-//     const { data } = await axios.post(`/api/coffees/${id}`);
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+export const editQuantityAsync = createAsyncThunk(
+  "coffee/editQuantity",
+  async ({ coffeeId, quantity }) => {
+    try {
+      const { data } = await axios.put(`/api/coffees/${coffeeId}`, {
+        quantity,
+      });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+export const handleAdminEditAsync = createAsyncThunk(
+  "coffee/editCoffeeListing",
+  async ({ coffeeId, name, countryOrigin, roast, price }) => {
+    try {
+      const { data } = await axios.put(`/api/coffees/${coffeeId}`, {
+        name,
+        countryOrigin,
+        roast,
+        price,
+      });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 const singleCoffeeSlice = createSlice({
   name: "singleCoffee",
@@ -52,20 +68,16 @@ const singleCoffeeSlice = createSlice({
       return action.payload;
     });
     builder.addCase(fetchAddToCart.fulfilled, (state, action) => {
-      state.cart(action.payload);
+      state.cart = action.payload;
     });
-    builder.addCase(fetchAddToCart.rejected, (state, action) => {
-      state.loading = false;
-      state.error = null;
+    builder.addCase(editQuantityAsync.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state = action.payload;
     });
-
-    // const newState = state.coffee.filter(
-    //   (coffee) => coffee.id !== action.payload.id
-    // );
-    // state.coffee = newState;
-    // builder.addCase(fetchUpdateCoffee.fulfilled, (state, action) => {
-    //   return { ...state, ...action.payload };
-    // });
+    builder.addCase(handleAdminEditAsync.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state = action.payload;
+    });
   },
 });
 

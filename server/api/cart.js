@@ -8,25 +8,51 @@ module.exports = router;
 router.get("/", async (req, res, next) => {
   try {
     const cart = await Cart.findAll({
-      attributes: ["id", "orderId", "coffeeId"],
-      include: [Orders, Coffee],
+      attributes: ["orderId", "coffeeId"],
     });
     res.json(cart);
   } catch (err) {
     next(err);
   }
 });
-router.get("/:id", async (req, res, next) => {
+// router.get("/:id", async (req, res, next) => {
+//   try {
+//     const cart = await Cart.findByPk(req.params.id, {
+//       attributes: ["orderId", "coffeeId"],
+//     });
+//     res.json(cart);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+router.post("/", async (req, res, next) => {
+  console.log("req.body:   ", req.body);
   try {
-    const cart = await Cart.findByPk(req.params.id, {
-      attributes: ["id", "orderId", "coffeeId"],
-      include: [Orders, Coffee],
-    });
-    res.json(cart);
-  } catch (err) {
-    next(err);
+    res.status(201).send(await Cart.create(req.body));
+  } catch (error) {
+    next(error);
   }
 });
+
+// router.post("/", async (req, res, next) => {
+//   // const user = await User.findByToken(req.headers.authorization);
+//   console.log("req.body:   ", req.body);
+//   const { ORDERID, COFFEEID } = req.body;
+//   try {
+//     const [cart, created] = await Cart.create({
+//       where: {
+//         orderId: ORDERID,
+//       },
+//       defaults: { coffeeId: COFFEEID },
+//     });
+//     if (created) {
+//       console.log("new order create", created);
+//     }
+//     res.json(cart);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 router.post("/", async (req, res, next) => {
   try {
@@ -40,19 +66,18 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/", async (req, res, next) => {
+  console.log("req.body:   ", req.body);
   try {
-    const cart = await Cart.findByPk(req.params.id);
+    const { ORDERID, COFFEEID } = req.body;
+    const cart = await Cart.findOne({
+      where: {
+        orderId: ORDERID,
+        coffeeId: COFFEEID,
+      },
+    });
     await cart.destroy();
     res.send(cart);
-  } catch (error) {
-    next(error);
-  }
-});
-router.put("/:id", async (req, res, next) => {
-  try {
-    const cart = await Cart.findByPk(req.params.id);
-    res.send(await cart.update(req.body));
   } catch (error) {
     next(error);
   }

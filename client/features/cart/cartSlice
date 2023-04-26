@@ -3,29 +3,20 @@ import axios from "axios";
 
 const initialState = { coffee: [], order: [], user: [] };
 
-export const fetchOneCartAsync = createAsyncThunk("/carts", async (cartId) => {
-  const { data } = await axios.get(`/api/carts/${cartId}`);
-  return data;
-});
+const TOKEN = "token";
+
 export const fetchOneOrderAsync = createAsyncThunk(
   "/orders",
-
   async (orderId) => {
-    const { data } = await axios.get(`/api/orders/${orderId}`);
-
-  async ({ orderId, userId }) => {
-    console.log(
-      "stuff the api is receiveing from axios request:",
-      "userId: ",
-      userId,
-      "orderId: ",
-      orderId
-    );
-    const { data } = await axios.put(`/api/orders/${orderId}`, {
-      USERID: `${userId}`,
-    });
-    // console.log(data);
-    return data;
+    const token = window.localStorage.getItem(TOKEN);
+    if (token) {
+      const { data } = await axios.get(`/api/orders/${orderId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return data;
+    }
   }
 );
 export const fetchUserAsync = createAsyncThunk("/users", async (userId) => {
@@ -39,19 +30,22 @@ export const editOrderStatusAsync = createAsyncThunk(
       const { data } = await axios.put(`/api/orders/${orderId}`, {
         fulfilled,
       });
+      console.log(data);
       return data;
     } catch (error) {
       console.error(error);
     }
   }
 );
+
 export const removeItemFromCartAsync = createAsyncThunk(
-  "coffees/editCartContents",
-  async ({ coffeeId, cartId }) => {
-    console.log("apI update request...cartId:", cartId);
+  "carts/editCartContents",
+  async ({ orderId, coffeeId }) => {
+    console.log("apI update request:", coffeeId, orderId);
     try {
-      const { data } = await axios.put(`/api/coffees/${coffeeId}`, {
-        cartId,
+      const { data } = await axios.delete(`/api/carts`, {
+        COFFEEID: coffeeId,
+        ORDERID: orderId,
       });
       return data;
     } catch (error) {
@@ -60,26 +54,13 @@ export const removeItemFromCartAsync = createAsyncThunk(
   }
 );
 
-=======
-// export const addOrderToNewUserAsync = createAsyncThunk(
-//   "order/addOrderToNewUser",
-//   async () => {
-//     const { data } = await axios.post("/api/orders", {});
-//     console.log(data);
-//     return data;
-//   }
-// );
-
-
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchOneCartAsync.fulfilled, (state, action) => {
-      state.coffee = action.payload.coffees;
-    });
     builder.addCase(fetchOneOrderAsync.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.order = action.payload;
     });
     builder.addCase(fetchUserAsync.fulfilled, (state, action) => {
@@ -89,15 +70,13 @@ export const cartSlice = createSlice({
       return action.payload;
     });
     builder.addCase(removeItemFromCartAsync.fulfilled, (state, action) => {
-      const newState = state.coffee.filter(
+      console.log(action.payload);
+      console.log(state.order.coffee);
+      const newState = state.order.coffee.filter(
         (coffee) => coffee.id !== action.payload.id
       );
-      state.coffee = newState;
+      state.order = newState;
     });
-
-    // builder.addCase(addOrderToNewUserAsync.fulfilled, (state, action) => {
-    //   state.order = action.payload;
-    // });
   },
 });
 

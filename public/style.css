@@ -1,10 +1,9 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:wght@300&display=swap');
- 
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:wght@300&display=swap");
 
 /* organized by page */
 body {
   background-color: black;
+  color: white;
 }
 
 a {
@@ -19,7 +18,6 @@ label {
   display: block;
 }
 
-
 /*home*/
 nav {
   display: inline-block;
@@ -27,18 +25,17 @@ nav {
   padding-block-end: 40px;
 }
 
-
 nav a {
   display: inline-block;
   margin: 1em;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   color: whitesmoke;
   text-decoration: none;
 }
 
-.logo{
+.logo {
   width: 150px;
-  height:150x;
+  height: 150x;
 }
 
 a:active {
@@ -57,31 +54,31 @@ video {
   height: auto;
 }
 
-#welcomediv{
+#welcomediv {
   display: grid;
   grid-template-columns: 40% 60%;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   color: whitesmoke;
-  font-size:11px;
+  font-size: 11px;
   padding-left: 20px;
 }
 
-.allcoffees{
+.allcoffees {
   padding-top: 500px;
-  font-family:'Roboto', sans-serif;
-  color:whitesmoke;
+  font-family: "Roboto", sans-serif;
+  color: whitesmoke;
   font-size: 20px;
   margin: 0px;
 }
 
-#allcoffees h2{
-  font-family:'Roboto', sans-serif;
-  color:whitesmoke;
+#allcoffees h2 {
+  font-family: "Roboto", sans-serif;
+  color: whitesmoke;
   font-size: 45px;
   margin-top: 85px;
 }
 
-#allcoffees h4{
+#allcoffees h4 {
   display: flex;
   align-content: center;
   font-size: 16px;
@@ -92,42 +89,40 @@ video {
   color: rgb(171, 134, 0);
 }
 
-#allcoffees{
-  display:grid;
+#allcoffees {
+  display: grid;
   grid-template-columns: 33% 33% 33%;
   max-width: 100%;
   height: auto;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: whitesmoke;
   margin-left: 20px;
   align-items: center;
 }
-
-
 
 /* login/signup */
 
 form div {
   margin: 1em;
   display: inline-block;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
-  color:whitesmoke
+  color: whitesmoke;
 }
 
 /* single coffee page */
 
-.single-coffee{
-  display:flex;
+.single-coffee {
+  display: flex;
   flex-wrap: wrap;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
-  color:  whitesmoke;
+  color: whitesmoke;
   margin-left: 10px;
 }
 
-.icrementaddbutton{
-  color:bisque;
+.icrementaddbutton {
+  color: bisque;
   font-family: "Roboto-mono", monospace;
   font-size: 10px;
   display: inline;
@@ -142,7 +137,7 @@ form div {
 
 .coffee-details {
   width: 50%;
-  margin:0;
+  margin: 0;
 }
 
 .incrementaddbutton {
@@ -156,30 +151,29 @@ form div {
   align-items: center;
 }
 
-
 /* about page */
 
 #fordevs {
-  display:grid;
+  display: grid;
   grid-template-columns: 40% 60%;
 }
 
-#about p{
-  display:grid;
+#about p {
+  display: grid;
   grid-template-columns: 33% 33% 33%;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: whitesmoke;
   padding: 1em;
-  display:flex;
+  display: flex;
   align-items: center;
   font-size: 20px;
 }
 
-#about h1{
-  font-family: 'Roboto', sans-serif;
+#about h1 {
+  font-family: "Roboto", sans-serif;
   color: whitesmoke;
   font-size: 55px;
-  float:left
+  float: left;
 }
 
 .coffeevid {
@@ -189,12 +183,7 @@ form div {
   float: right;
 }
 
-#ourstory{
-  display:flex;
+#ourstory {
+  display: flex;
   align-items: right;
 }
-
-
-
-
-
